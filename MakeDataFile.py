@@ -2,6 +2,12 @@
 
 def txt2aslad(FnameTXT,
 	      FnameASLAD):
+	"""
+	User input explained:
+
+ 	FnameTXT = TXT data file (0/1 matrix, observations = rows)
+	FnameASLAD = ASLAD data file name for output
+	"""
 
         print "--- txt2aslad"
         print " input file:", FnameTXT
@@ -40,4 +46,3 @@ def txt2aslad(FnameTXT,
 	print " output file:", FnameASLAD
         print "---"
 
-txt2aslad("2018/AnswerSetLAD/data/10x10input.txt", "2018/AnswerSetLAD/data/10x10input.aslad")
