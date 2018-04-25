@@ -29,12 +29,12 @@ The output file consists of a list of facts
 i(sign, observationnumber, featurenumber, featurevalue).
 ```
 where 
- * sign is the sign of the observation, 
- * observationnumber is the number of the observation,
- * featurenumber is the number of the feature,
- * featurevalue is the value of the feature.
+ * 'sign' is the sign of the observation, 
+ * 'observationnumber' is the number of the observation,
+ * 'featurenumber' is the number of the feature,
+ * 'featurevalue' is the value of the feature.
 
-The first row of the given example data in [10x10input.txt](./data/10x10input.txt) would therefore look like this in the output file:
+The first row of the given example data in [10x10input.txt](./data/10x10input.txt) therefore looks like this in the output file:
 ```
 i(1,1,1,1).
 i(1,1,2,0).
