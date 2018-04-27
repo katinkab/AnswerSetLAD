@@ -1,5 +1,5 @@
 
-% Data usable for AnswerSetLAD from input file 2018/AnswerSetLAD/data/10x10input.txt
+% Data usable for AnswerSetLAD from input file data/10x10input.txt
 
 i(1,1,1,1).
 i(1,1,2,0).
