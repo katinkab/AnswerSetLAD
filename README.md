@@ -4,15 +4,14 @@ AnswerSetLAD is a toolbox for pattern generation according to the _Logical Analy
 ## Definitions
 
 #### Degree of a pattern
-The _degree_ of a pattern is the number of its literals.
+The _degree_ of a pattern _P_ is the number of its literals.
 
 #### Homogeneity of a pattern
-The \emph{homogeneity} $\homo{P}$ of a positive pattern $P$ is given by
+The _homogeneity_ _Hom⁺(P)_ of a positive pattern _P_ is given by
 ```
-\homo{P}=\frac{\Covpos{P}}{\Cov{P}},
-\label{hom_condition}
+_Hom(P)_=\frac{_Cov⁺(P)_}{_Cov(P)_},
 ```
-where $\Covpos{P}$ is the number of positive observations covered by $P$ and $\Cov{P}$ is the number of observations covered in total. The homogeneity $\homoneg{P}$   of a negative pattern $P$   is defined analogously.
+where _Cov⁺(P)_ is the number of positive observations covered by _P_ and _Cov(P)_ is the number of observations covered in total. The homogeneity _Hom⁻(P)_  of a negative pattern _P_ is defined analogously.
 
 #### Prevalence of a pattern
 The _prevalence_ of a pattern is the number of its literals.
