@@ -18,13 +18,13 @@ An example of a suitable input data file is given in [10x10input.txt](./data/10x
 0,0,0,0,1,1,0,0,1,1,0
 ```
 #### Generating a readable input data file
-A data file that can be read by the ASP program is created by a call of the function `MakeDataFile.txt2aslad(FnameTXT, FnameASLAD)`.
+A data file that can be read by the ASP program is created by a call of the function `MakeDataFile.txt2asp(FnameTXT, FnameASP)`.
 For the example given above we call
 ```
-MakeDataFile.txt2aslad("data/10x10input.txt", "data/10x10input.aslad")
+MakeDataFile.txt2asp("data/10x10input.txt", "data/10x10input.asp")
 ```
 and create a readable output file. 
-The output file consists of a list of facts
+The output file consists of facts
 ```
 i(sign, observationnumber, featurenumber, featurevalue).
 ```

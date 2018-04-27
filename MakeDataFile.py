@@ -1,22 +1,22 @@
 # -*- coding: utf-8 -*-
 
-def txt2aslad(FnameTXT,
-	      FnameASLAD):
+def txt2asp(FnameTXT,
+	      FnameASP):
 	"""
 	User input explained:
 
  	FnameTXT = TXT data file (0/1 matrix, observations = rows)
-	FnameASLAD = ASLAD data file name for output
+	FnameASP = ASP data file name for output
 	"""
 
-        print "--- txt2aslad"
+        print "--- txt2asp"
         print " input file:", FnameTXT
 
 	txt_file  = open(FnameTXT, "r") 
 
-	aslad_file= [""]
-    	aslad_file+= ["%% Data usable for AnswerSetLAD from input file %s"%FnameTXT]
-	aslad_file+= [""]
+	asp_file= [""]
+    	asp_file+= ["%% Data usable for AnswerSetLAD from input file %s"%FnameTXT]
+	asp_file+= [""]
 	
 	obsnbr=0
 	delimiter=","
@@ -33,16 +33,16 @@ def txt2aslad(FnameTXT,
 			featnbr = featnbr+1			
 			featval = line[index+1]
 			index += len(delimiter)    
-			aslad_file+= ["i(%s,%s,%s,%s)."%(str(sign), obsnbr, featnbr, featval)]
+			asp_file+= ["i(%s,%s,%s,%s)."%(str(sign), obsnbr, featnbr, featval)]
 
-	if FnameASLAD==None:
-        	return "\n".join(aslad_file)
+	if FnameASP==None:
+        	return "\n".join(asp_file)
     	else:
-       		with open(FnameASLAD, 'w') as f:
-           		f.writelines("\n".join(aslad_file))
+       		with open(FnameASP, 'w') as f:
+           		f.writelines("\n".join(asp_file))
 
 	print " number of observations: ", obsnbr
 	print " number of features: ", featnbr
-	print " output file:", FnameASLAD
+	print " output file:", FnameASP
         print "---"
 
