@@ -77,10 +77,11 @@ Each of the pattern generation files include four constants that have to be spec
  * _prevalence_ is the prevalence of the pattern given as a percentage;
 
 see the definitions above for explanation.
-For example to calculate a positive prime pattern of degree two from the toy data set call:
+
+To calculate a positive prime pattern of degree two from the toy data set call:
  
 ```
-$ clingo AnswerSetLAD/data/10x10input.asp AnswerSetLAD/AnswerSetLAD_primepattern.asp -c sign=1 -c degree=2 -c homogeneity=100 -c prevalence=0 
+$ clingo data/10x10input.asp AnswerSetLAD_primepattern.asp -c sign=1 -c degree=2 -c homogeneity=100 -c prevalence=0 
 ```
 The problem will be solved and the terminal displays the following answer:
 ```
@@ -89,9 +90,25 @@ Answer: 1
 pat(9,0) pat(10,0)
 SATISFIABLE
 ```
+The answer set is a set of literals _pat(featurenumber,featurevalue)_ which are combined by AND gates. This answer set represents the prime pattern `NOT feature 9 AND NOT feature 10`.
 
 
-The answer set of each program is one pattern fulfilling the given constraints. To see all optimal patterns use  `-n`.
+The answer set of each program is one pattern fulfilling the given constraints. To see all optimal patterns use the `-n 0` option:
+```
+$ clingo data/10x10input.asp AnswerSetLAD_primepattern.asp -c sign=1 -c degree=2 -c homogeneity=100 -c prevalence=0 -n 0
+
+Solving...
+Answer: 1
+pat(9,0) pat(10,0)
+Answer: 2
+pat(4,0) pat(10,0)
+Answer: 3
+pat(2,0) pat(4,0)
+Answer: 4
+pat(2,0) pat(9,0)
+SATISFIABLE
+```
+This result shows all positive prime patterns of degree two.
 
 
 
