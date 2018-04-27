@@ -1,6 +1,22 @@
 # AnswerSetLAD
 AnswerSetLAD is a toolbox for pattern generation according to the _Logical Analysis of Data_ (LAD) making use of _Answer Set Programming_ (ASP). 
 
+## Definitions
+
+#### Degree of a pattern
+The _degree_ of a pattern is the number of its literals.
+
+#### Homogeneity of a pattern
+The \emph{homogeneity} $\homo{P}$ of a positive pattern $P$ is given by
+```
+\homo{P}=\frac{\Covpos{P}}{\Cov{P}},
+\label{hom_condition}
+```
+where $\Covpos{P}$ is the number of positive observations covered by $P$ and $\Cov{P}$ is the number of observations covered in total. The homogeneity $\homoneg{P}$   of a negative pattern $P$   is defined analogously.
+
+#### Prevalence of a pattern
+The _prevalence_ of a pattern is the number of its literals.
+
 ## Example
 #### Input data
 An input data file is a 0-1 matrix. Each row of the matrix represents an observation. The first column stands for the sign of the observation. The following columns represent the different features which were observed.
@@ -50,12 +66,27 @@ i(1,1,10,0).
 
 #### Calculating patterns
 
-To execute the files for pattern generation we use the ASP solver _clingo_ by [Potassco](https://potassco.org/).
+To execute the files for pattern generation we use the ASP solver _clingo_ by [Potassco](https://potassco.org/). 
+So far three different kinds of patterns are implemented, namely general patterns [AnswerSetLAD_patterns.asp](./AnswerSetLAD_patterns.asp), prime patterns [AnswerSetLAD_primepatterns.asp](./AnswerSetLAD_primepatterns.asp) and strong patterns [AnswerSetLAD_strongpatterns.asp](./AnswerSetLAD_strongpatterns.asp).
+
+Each of the pattern generation files include four constants that have to be specified by the user (otherwise they are set to the default option). These constants are
+
+ * _sign_ is the sign of the pattern;
+ * _degree_ is the degree of the pattern;
+ * _homogeneity_ is the homogeneity of the pattern given as a percentage;
+ * _prevalence_ is the prevalence of the pattern given as a percentage;
+
+see the definitions above for explaination.
+
+
+
+
+
 
 ## Files
  * [AnswerSetLAD_patterns.asp](./AnswerSetLAD_patterns.asp) contains the code for generating patterns;
- * [AnswerSetLAD_primepatterns.asp](./AnswerSetLAD_primepatterns.asp) contains the code for generating prime patterns;
- * [AnswerSetLAD_patterns.asp](./AnswerSetLAD_patterns.asp) contains the code for generating strong patterns;
+ * [AnswerSetLAD_primepatterns.asp](./AnswerSetLAD_primepatterns.asp) contains the code for generating _prime_ patterns;
+ * [AnswerSetLAD_strongpatterns.asp](./AnswerSetLAD_strongpatterns.asp) contains the code for generating _strong_ patterns;
  * [MakeDataFile.py](./MakeDataFile.py) is used to produce a data file in the required format;
  * [data](./data) contains example data files both in .txt as well as in the required .asp format.
 

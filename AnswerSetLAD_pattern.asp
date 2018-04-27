@@ -7,7 +7,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%CONSTANTS%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%User can choose constants: degree, homogeneity, prevalence, sign
+%%%User can choose constants: sign, degree, homogeneity, prevalence
+
+%%%sign of pattern
+#const sign=1.
 
 %%%degree
 #const degree=1.
@@ -18,8 +21,6 @@
 %%%prevalence (percentage): 0..100% of "right" class obs are covered (how many obs of "right" class have be covered?)
 #const prevalence=0.
 
-%%%sign of pattern
-#const sign=1.
 
 
 %%%count number of "right" observations (same sign as pattern)
