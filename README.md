@@ -93,7 +93,7 @@ SATISFIABLE
 The answer set is a set of literals _pat(featurenumber,featurevalue)_ which are combined by AND gates. This answer set represents the prime pattern `NOT feature 9 AND NOT feature 10`.
 
 
-The answer set of each program is one pattern fulfilling the given constraints. To see all optimal patterns use the `-n 0` option:
+The answer set of each program is one pattern fulfilling the given constraints. To see all optimal patterns use the `-n 0` option of _clingo_:
 ```
 $ clingo data/10x10input.asp AnswerSetLAD_primepattern.asp -c sign=1 -c degree=2 -c homogeneity=100 -c prevalence=0 -n 0
 
@@ -108,7 +108,7 @@ Answer: 4
 pat(2,0) pat(9,0)
 SATISFIABLE
 ```
-This result shows all positive prime patterns of degree two.
+This result shows all positive prime patterns of degree two with perfect homogeneity and trivial bound on the prevalence.
 
 
 
