@@ -9,7 +9,7 @@ The _degree_ of a pattern _P_ is the number of its literals.
 #### Homogeneity of a pattern
 The _homogeneity_ _Hom⁺(P)_ of a positive pattern _P_ is given by
 ```
-_Hom(P)_=\frac{_Cov⁺(P)_}{_Cov(P)_},
+Hom⁺(P)=Cov⁺(P)/Cov(P),
 ```
 where _Cov⁺(P)_ is the number of positive observations covered by _P_ and _Cov(P)_ is the number of observations covered in total. The homogeneity _Hom⁻(P)_  of a negative pattern _P_ is defined analogously.
 
