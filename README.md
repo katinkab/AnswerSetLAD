@@ -1,5 +1,5 @@
 # AnswerSetLAD
-AnswerSetLAD is a toolbox for pattern generation according to the Logical Analysis of Data (LAD) making use of Answer Set Programming (ASP). 
+AnswerSetLAD is a toolbox for pattern generation according to the _Logical Analysis of Data_ (LAD) making use of _Answer Set Programming_ (ASP). 
 
 ## Example
 #### Input data
@@ -29,10 +29,10 @@ The output file consists of facts
 i(sign, observationnumber, featurenumber, featurevalue).
 ```
 where 
- * 'sign' is the sign of the observation, 
- * 'observationnumber' is the number of the observation,
- * 'featurenumber' is the number of the feature,
- * 'featurevalue' is the value of the feature.
+ * _sign_ is the sign of the observation, 
+ * _observationnumber_ is the number of the observation,
+ * _featurenumber_ is the number of the feature,
+ * _featurevalue_ is the value of the feature.
 
 The first row of the given example data in [10x10input.txt](./data/10x10input.txt) therefore looks like this in the output file:
 ```
@@ -47,6 +47,10 @@ i(1,1,8,1).
 i(1,1,9,0).
 i(1,1,10,0).
 ```
+
+#### Calculating patterns
+
+To execute the files for pattern generation we use the ASP solver _clingo_ by [Potassco](https://potassco.org/).
 
 ## Files
  * [AnswerSetLAD_patterns.asp](./AnswerSetLAD_patterns.asp) contains the code for generating patterns;
