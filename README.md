@@ -47,3 +47,11 @@ i(1,1,8,1).
 i(1,1,9,0).
 i(1,1,10,0).
 ```
+
+## Files
+ * [AnswerSetLAD_patterns.asp](./AnswerSetLAD_patterns.asp) contains the code for generating patterns;
+ * [AnswerSetLAD_primepatterns.asp](./AnswerSetLAD_primepatterns.asp) contains the code for generating prime patterns;
+ * [AnswerSetLAD_patterns.asp](./AnswerSetLAD_patterns.asp) contains the code for generating strong patterns;
+ * [MakeDataFile.py](./MakeDataFile.py) is used to produce a data file in the required format;
+ * [data](./data) contains example data files both in .txt as well as in the required .asp format.
+
