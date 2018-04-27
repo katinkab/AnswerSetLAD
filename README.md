@@ -76,7 +76,22 @@ Each of the pattern generation files include four constants that have to be spec
  * _homogeneity_ is the homogeneity of the pattern given as a percentage;
  * _prevalence_ is the prevalence of the pattern given as a percentage;
 
-see the definitions above for explaination.
+see the definitions above for explanation.
+For example to calculate a positive prime pattern of degree two from the toy data set call:
+ 
+```
+$ clingo AnswerSetLAD/data/10x10input.asp AnswerSetLAD/AnswerSetLAD_primepattern.asp -c sign=1 -c degree=2 -c homogeneity=100 -c prevalence=0 
+```
+The problem will be solved and the terminal displays the following answer:
+```
+Solving...
+Answer: 1
+pat(9,0) pat(10,0)
+SATISFIABLE
+```
+
+
+The answer set of each program is one pattern fulfilling the given constraints. To see all optimal patterns use  `-n`.
 
 
 
