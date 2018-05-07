@@ -3,14 +3,14 @@ AnswerSetLAD is a toolbox for pattern generation according to the _Logical Analy
 
 ## Definitions
 
-#### Homogeneity of a pattern
+### Homogeneity of a pattern
 The _homogeneity_ _Hom⁺(P)_ of a positive pattern _P_ is given by
 ```
 Hom⁺(P)=Cov⁺(P)/Cov(P),
 ```
 where _Cov⁺(P)_ is the number of positive observations covered by _P_ and _Cov(P)_ is the number of observations covered in total. The homogeneity _Hom⁻(P)_  of a negative pattern _P_ is defined analogously.
 
-#### Prevalence of a pattern
+### Prevalence of a pattern
 The _prevalence_ _Prev⁺(P)_ of a positive pattern _P_ is given by
 ```
 Prev⁺(P)=Cov⁺(P)/|Ω⁺|,
@@ -18,7 +18,7 @@ Prev⁺(P)=Cov⁺(P)/|Ω⁺|,
 where _Cov⁺(P)_ is the number of positive observations covered by _P_ and _Ω⁺_ is the set of positive observations. The prevalence _Prev⁻(P)_ of a negative pattern _P_ is defined analogously.
 
 ## Example
-#### Input data
+### Input data
 An input data file is a 0-1 matrix. Each row of the matrix represents an observation. The first column stands for the sign of the observation. The following columns represent the different features which were observed.
 An example of a suitable input data file is given in [10x10input.txt](./data/10x10input.txt):
 ```
@@ -33,7 +33,7 @@ An example of a suitable input data file is given in [10x10input.txt](./data/10x
 0,0,1,0,0,0,0,0,1,0,1
 0,0,0,0,1,1,0,0,1,1,0
 ```
-#### Generating a readable input data file
+### Generating a readable input data file
 A data file that can be read by the ASP program is created by a call of the function `MakeDataFile.txt2asp(FnameTXT, FnameASP)`.
 For the example given above we call
 ```
@@ -64,7 +64,7 @@ i(1,1,9,0).
 i(1,1,10,0).
 ```
 
-#### Calculating patterns
+### Calculating patterns
 
 To execute the files for pattern generation we use the ASP solver _clingo_ by [Potassco](https://potassco.org/). 
 So far three different kinds of patterns are implemented, namely general patterns [AnswerSetLAD_patterns.asp](./AnswerSetLAD_patterns.asp), prime patterns [AnswerSetLAD_primepatterns.asp](./AnswerSetLAD_primepatterns.asp) and strong patterns [AnswerSetLAD_strongpatterns.asp](./AnswerSetLAD_strongpatterns.asp).
@@ -110,7 +110,7 @@ SATISFIABLE
 ```
 This result shows all positive prime patterns of degree two with perfect homogeneity and trivial bound on the prevalence.
 
-##### Calculating all patterns for a data set
+#### Calculating all patterns for a data set
 
 To calculate all positive and negative patterns between a lower bound on the degree and an upper bound on the degree use the script `allpatterns.py`. It requires six (up to seven) arguments. These are:
 
@@ -136,5 +136,6 @@ will thus calculate all strong patterns in the example data set from degree 1 to
  * [AnswerSetLAD_primepatterns.asp](./AnswerSetLAD_primepatterns.asp) contains the code for generating _prime_ patterns;
  * [AnswerSetLAD_strongpatterns.asp](./AnswerSetLAD_strongpatterns.asp) contains the code for generating _strong_ patterns;
  * [MakeDataFile.py](./MakeDataFile.py) is used to produce a data file in the required format;
+ * [allpatterns.py](./allpatterns.py) computes all patterns between bounds on the degree;
  * [data](./data) contains example data files both in .txt as well as in the required .asp format.
 
