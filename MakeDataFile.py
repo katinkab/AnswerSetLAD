@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import sys
+
 def txt2asp(FnameTXT,
 	      FnameASP):
 	"""
@@ -45,4 +47,7 @@ def txt2asp(FnameTXT,
 	print " number of features: ", featnbr
 	print " output file:", FnameASP
         print "---"
+
+if __name__ == '__main__':
+    txt2asp(*sys.argv[1:])
 
