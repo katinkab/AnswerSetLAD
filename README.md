@@ -34,10 +34,14 @@ An example of a suitable input data file is given in [10x10input.txt](./data/10x
 0,0,0,0,1,1,0,0,1,1,0
 ```
 ### Generating a readable input data file
-A data file that can be read by the ASP program is created by a call of the function `MakeDataFile.txt2asp(FnameTXT, FnameASP)`.
+A data file that can be read by the ASP program is created by a call of `MakeDataFile.py`. The script requires two arguments. These are:
+
+ * the direction to the input data file;
+ * the direction to the output data file.
+
 For the example given above we call
 ```
-MakeDataFile.txt2asp("data/10x10input.txt", "data/10x10input.asp")
+python MakeDataFile.py data/10x10input.txt data/10x10input.asp
 ```
 and create a readable output file. 
 The output file consists of facts
