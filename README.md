@@ -110,9 +110,25 @@ SATISFIABLE
 ```
 This result shows all positive prime patterns of degree two with perfect homogeneity and trivial bound on the prevalence.
 
+##### Calculating all patterns for a data set
 
+To calculate all positive and negative patterns between a lower bound on the degree and an upper bound on the degree use the script `allpatterns.py`. It requires six (up to seven) arguments. These are:
 
+ * the input data file;
+ * the file that should be used for pattern calculation;
+ * the lower bound on the degree;
+ * the upper bound on the degree;
+ * the lower bound on the homogeneity;
+ * the lower bound on the prevalence;
+ * "quiet" if you do not want all patterns to be listed (optional).
 
+The function call
+
+```
+python allpatterns.py data/10x10input.asp AnswerSetLAD_strongpattern.asp 1 10 90 10
+
+```
+will thus calculate all strong patterns in the example data set from degree 1 to degree 10 with homogeneity greater or equal 90 percent and prevalence greater or equal 10 percent.
 
 
 ## Files
