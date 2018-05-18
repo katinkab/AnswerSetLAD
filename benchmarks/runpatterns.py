@@ -84,4 +84,5 @@ def runpatt(FnameDATA,
 
 
 if __name__ == '__main__':
+	makedata(*sys.argv[1:])
 	runpatt(*sys.argv[1:])
