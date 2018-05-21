@@ -2,12 +2,17 @@
 
 import sys
 import subprocess
+import time
+import numpy
 
-def makedata(FnameTXT,
-	     FnameDATA):
 
-	print "--- Hello! This is makedata!"
+def makedata(FnameTXT):
+
+	print "--- Hello! This is runpatterns.py!"
         print " input file:", FnameTXT
+
+	Name = FnameTXT.split(".")
+	FnameASP = Name[0]+".asp"
 
 	txt_file  = open(FnameTXT, "r") 
 
@@ -29,6 +34,8 @@ def makedata(FnameTXT,
 				break 
 			featnbr = featnbr+1			
 			featval = line[index+1]
+			if featval!="0" and featval!="1":
+				break
 			index += len(delimiter)    
 			asp_file+= ["i(%s,%s,%s,%s)."%(str(sign), obsnbr, featnbr, featval)]
 
@@ -37,12 +44,16 @@ def makedata(FnameTXT,
     	else:
        		with open(FnameASP, 'w') as f:
            		f.writelines("\n".join(asp_file))
-
+	
 	print " output file:", FnameASP
         print "---"
 	
+	return FnameASP
 
-def runpatt(FnameDATA,
+
+	
+
+def runpatt(FnameASP,
 	    PatternType,
 	    DegLowerBound,
 	    DegUpperBound):
@@ -50,12 +61,14 @@ def runpatt(FnameDATA,
 	low = int(DegLowerBound)
 	high = int(DegUpperBound)
 		
-	clingo = "Arbeitsfläche/clingo-4.5.4-linux-x86_64/clingo"
+	clingo = "Schreibtisch/clingo-4.5.4-linux-x86_64/clingo"
 
-	print " positive patterns:"
+	start_time = time.time()
+
+	#print " positive patterns:"
 
 	for deg in range(low,high+1):
-		process = subprocess.Popen([clingo, FnameDATA, PatternType, "-c sign=1", "-c degree=%i"%deg, "-c homogeneity=100", "-c prevalence=0", "-n 0", "--quiet"], stdout=subprocess.PIPE)
+		process = subprocess.Popen([clingo, FnameASP, PatternType, "-c sign=1", "-c degree=%i"%deg, "-c homogeneity=100", "-c prevalence=0", "-n 0", "--quiet"], stdout=subprocess.PIPE)
 		while True:
   			line = process.stdout.readline()
   			if line !="":
@@ -66,10 +79,10 @@ def runpatt(FnameDATA,
     				break
 
 	print ""
-	print " negative patterns:"
+	#print " negative patterns:"
 
 	for deg in range(low,high+1):
-		process = subprocess.Popen([clingo, FnameDATA, PatternType, "-c sign=0", "-c degree=%i"%deg, "-c homogeneity=100", "-c prevalence=0", "-n 0", "--quiet"], stdout=subprocess.PIPE)
+		process = subprocess.Popen([clingo, FnameASP, PatternType, "-c sign=0", "-c degree=%i"%deg, "-c homogeneity=100", "-c prevalence=0", "-n 0", "--quiet"], stdout=subprocess.PIPE)
 		while True:
   			line = process.stdout.readline()
   			if line !="":
@@ -79,10 +92,21 @@ def runpatt(FnameDATA,
 				print ""
     				break
 
-        print "--- getallpatterns done. "
+	endtime = time.time() - start_time
+
+	print("--- %s seconds ---" %endtime)
+
+        print "--- done. "
+	
+	Time.append(endtime)
+
+	return Time
 
 
 
 if __name__ == '__main__':
-	makedata(*sys.argv[1:])
-	runpatt(*sys.argv[1:])
+	FnameTXT = "Schreibtisch/AnswerSetLAD/benchmarks/randomdata/randomdataset50x50.txt"
+	PatternType = "Schreibtisch/AnswerSetLAD/AnswerSetLAD_primepattern.asp"
+	Time = []
+	runpatt(makedata(FnameTXT), PatternType,1,3)
+	print Time
