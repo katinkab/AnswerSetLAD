@@ -4,15 +4,19 @@ import sys
 import subprocess
 import time
 import numpy
+from os import listdir
 
 
 def makedata(FnameTXT):
 
 	print "--- Hello! This is runpatterns.py!"
+	print " Converting the data to a readable format... "
         print " input file:", FnameTXT
 
 	Name = FnameTXT.split(".")
 	FnameASP = Name[0]+".asp"
+	
+	ModelsInTime.append(Name[0].split("/")[-1])
 
 	txt_file  = open(FnameTXT, "r") 
 
@@ -46,7 +50,6 @@ def makedata(FnameTXT):
            		f.writelines("\n".join(asp_file))
 	
 	print " output file:", FnameASP
-        print "---"
 	
 	return FnameASP
 
@@ -57,6 +60,8 @@ def runpatt(FnameASP,
 	    PatternType,
 	    DegLowerBound,
 	    DegUpperBound):
+	
+	print " Generating Patterns..."
 
 	low = int(DegLowerBound)
 	high = int(DegUpperBound)
@@ -65,7 +70,9 @@ def runpatt(FnameASP,
 
 	start_time = time.time()
 
-	#print " positive patterns:"
+	numberofmodels = 0
+
+	#positive patterns
 
 	for deg in range(low,high+1):
 		process = subprocess.Popen([clingo, FnameASP, PatternType, "-c sign=1", "-c degree=%i"%deg, "-c homogeneity=100", "-c prevalence=0", "-n 0", "--quiet"], stdout=subprocess.PIPE)
@@ -73,13 +80,10 @@ def runpatt(FnameASP,
   			line = process.stdout.readline()
   			if line !="":
 				if "Models" in line:
-					print "  degree %i:"%deg, line.rstrip()
+					numberofmodels = numberofmodels + int(line.split(":")[1])
   			else:
-				print ""
     				break
-
-	print ""
-	#print " negative patterns:"
+	#negative patterns
 
 	for deg in range(low,high+1):
 		process = subprocess.Popen([clingo, FnameASP, PatternType, "-c sign=0", "-c degree=%i"%deg, "-c homogeneity=100", "-c prevalence=0", "-n 0", "--quiet"], stdout=subprocess.PIPE)
@@ -87,26 +91,31 @@ def runpatt(FnameASP,
   			line = process.stdout.readline()
   			if line !="":
 				if "Models" in line:
-					print "  degree %i:"%deg, line.rstrip()
+					numberofmodels = numberofmodels + int(line.split(":")[1])
   			else:
-				print ""
     				break
 
 	endtime = time.time() - start_time
 
-	print("--- %s seconds ---" %endtime)
+	print(" %s models in %s seconds" %(numberofmodels, endtime))
 
-        print "--- done. "
+	ModelsInTime.append((numberofmodels,endtime))
+
+	return ModelsInTime
+
+	print ModelsInTime
 	
-	Time.append(endtime)
-
-	return Time
+	#delete .asp file
 
 
 
 if __name__ == '__main__':
 	FnameTXT = "Schreibtisch/AnswerSetLAD/benchmarks/randomdata/randomdataset50x50.txt"
 	PatternType = "Schreibtisch/AnswerSetLAD/AnswerSetLAD_primepattern.asp"
-	Time = []
-	runpatt(makedata(FnameTXT), PatternType,1,3)
-	print Time
+	ModelsInTime = []
+
+	for file in listdir("Schreibtisch/AnswerSetLAD/benchmarks/randomdata"):
+		FnameTXT = "Schreibtisch/AnswerSetLAD/benchmarks/randomdata/"+file
+		runpatt(makedata(FnameTXT), PatternType,1,2)
+	
+	print ModelsInTime
