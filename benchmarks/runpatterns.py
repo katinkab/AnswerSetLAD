@@ -4,10 +4,13 @@ import sys
 import subprocess
 import time
 import numpy
+import os
 from os import listdir
 
 
 def makedata(FnameTXT):
+
+	#checking if observation sets are disjoint
 
 	print "--- Hello! This is runpatterns.py!"
 	print " Converting the data to a readable format... "
@@ -66,7 +69,7 @@ def runpatt(FnameASP,
 	low = int(DegLowerBound)
 	high = int(DegUpperBound)
 		
-	clingo = "Schreibtisch/clingo-4.5.4-linux-x86_64/clingo"
+	clingo = "Arbeitsfläche/clingo-4.5.4-linux-x86_64/clingo"
 
 	start_time = time.time()
 
@@ -101,21 +104,21 @@ def runpatt(FnameASP,
 
 	ModelsInTime.append((numberofmodels,endtime))
 
-	return ModelsInTime
+	os.remove(FnameASP)
 
 	print ModelsInTime
-	
-	#delete .asp file
+
+	return ModelsInTime
+
 
 
 
 if __name__ == '__main__':
-	FnameTXT = "Schreibtisch/AnswerSetLAD/benchmarks/randomdata/randomdataset50x50.txt"
-	PatternType = "Schreibtisch/AnswerSetLAD/AnswerSetLAD_primepattern.asp"
+	PatternType = "2018/AnswerSetLAD/AnswerSetLAD_primepattern.asp"
 	ModelsInTime = []
 
-	for file in listdir("Schreibtisch/AnswerSetLAD/benchmarks/randomdata"):
-		FnameTXT = "Schreibtisch/AnswerSetLAD/benchmarks/randomdata/"+file
-		runpatt(makedata(FnameTXT), PatternType,1,2)
+	for file in listdir("2018/AnswerSetLAD/benchmarks/randomdata/lessdata"):
+		FnameTXT = "2018/AnswerSetLAD/benchmarks/randomdata/lessdata/"+file
+		runpatt(makedata(FnameTXT), PatternType,1,3)
 	
 	print ModelsInTime
