@@ -3,7 +3,7 @@
 %  AnswerSetLAD - an implementation of LAD in ASP  %
 % ------------------------------------------------ %
 %                                                  %  
-%           STRONG PATTERN GENERATION              % 
+%         STRONGEST PATTERN GENERATION             % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%CONSTANTS%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -43,9 +43,9 @@ covered(W,X):-not not_covered(W,X),i(W,X,_,_).
 %%%prevalence: pattern has to cover as many "right" obs as wanted in prevalence constant
 :-nbrrightobs(C),#sum{100,X:covered(W,X),W=sign}<prevalence*C.
 
-%%%for strong pattern calculation: maximize the number of covered obs
+%%%for strongest pattern calculation: maximize the number of covered obs
+%%%then minimize number of literals for prime
 #maximize {1@2,X :covered(W,X)}.
-%%%strong end
 #minimize {1@1,S :pat(S,B)}.
 
 #show pat/2.
