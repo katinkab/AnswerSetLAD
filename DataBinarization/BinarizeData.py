@@ -4,6 +4,8 @@ import sys
 import pandas
 import csv
 import numpy as np
+import itertools
+from decimal import Decimal
 
 def binarize(originalCSV,
 	     binCSV):
@@ -11,6 +13,8 @@ def binarize(originalCSV,
 	User input explained:
 
  	originalCSV = CSV data file (attributes = columns, observations = rows)
+		- the input file needs to have the classes in the first column ('col0');
+		- all columns have to be named 'col0', 'col1',...
 	binCSV = data file name for binary output file
 	"""
 
@@ -20,76 +24,110 @@ def binarize(originalCSV,
 	
 	#read csv data file
 	data = pandas.read_csv(originalCSV, header=0, delimiter=",")	
-	print data
 	nbrofrows = len(data)
 	print " number of rows:", nbrofrows
+	#dataframe for output
+	binarydata = pandas.DataFrame(data['col0'])
+	binarydata.columns = ['classes']
+	
+	myheader = list(data)
+	print myheader
 
-	#cutpoints t_s=1/2*(v_(s-1)+v_s)
-	sortdata = data.sort_values(by=['col1'])
-	sortdata = sortdata.reset_index(drop=True)
-	print sortdata
+	#iterate over columns in original data
+	for mycol in myheader:
+		#COLUMN1
+		#cutpoints t_s=1/2*(v_(s-1)+v_s)
+		sortdata = data.sort_values(by=[mycol])
+		sortdata = sortdata.reset_index(drop=True)
 
-	myindex = 0
-	print sortdata['col1']
-	for val in sortdata['col1']:
-		print "value", val
-		exists_pos = False
-		exists_neg = False
-		exists_pos_next = False
-		exists_neg_next = False
+		myindex = 0		
+		cutpoints = []	
 
-		myindex = myindex + 1
-		if myindex == nbrofrows:
-			break
+		print "--------------------"
+		print "essential cutpoints:"
+		for val in sortdata[mycol]:
+			exists_pos = False
+			exists_neg = False
+			exists_pos_next = False
+			exists_neg_next = False
 
-		val_next=sortdata['col1'].get_value(myindex)
-		print "value next", val_next
+			myindex = myindex + 1
+			if myindex == nbrofrows:
+				break
 
-		#cut-point
-		if val != val_next:
-			#essential?
-			app_val = sortdata['col1'][sortdata['col1']==val]
-			print "app_val", app_val
-			new_app = sortdata['col1'].loc[sortdata['col1'][sortdata['col1']==val]]
-			print "new_app", new_app
-			#pos/neg class for val?
-			for ind in app_val:
-				if sortdata['col0'].get_value(ind) == 1:
-					exists_pos = True
-					print "exists_pos!", sortdata['col0'].get_value(ind), "index", ind
-				if sortdata['col0'].get_value(ind) == 0:
-					exists_neg = True
-					print "exists_neg!", sortdata['col0'].get_value(ind), "index", ind
-
-
-			app_val_next = sortdata['col1'][sortdata['col1']==val_next]
-			print "app_val_next", app_val_next
-			#pos/neg class for val_next?
-			for ind in app_val_next:
-				if sortdata['col0'].get_value(ind) == 1:
-					exists_pos_next = True
-					print "exists_pos_next!", sortdata['col0'].get_value(ind), "index", ind
-				if sortdata['col0'].get_value(ind) == 0:
-					exists_neg_next = True
-					print "exists_neg_next!", sortdata['col0'].get_value(ind), "index", ind
-
-			if exists_pos and exists_neg_next:
-					cut= 0.5*(val+val_next)
-					print "cutpoint:", val, val_next, cut
-			if exists_neg and exists_pos_next:
-					cut= 0.5*(val+val_next)
-					print "cutpoint:" ,val, val_next, cut
-
-	print sortdata['col0']
-	print "here it is:", sortdata['col0'].get_value(10)
-			
-			
-		
-			
-
+			val_next=sortdata[mycol].get_value(myindex)
 	
 
+			#cut-point
+			if val != val_next:
+				#essential?
+				appearance = sortdata.index[sortdata[mycol] == val].tolist()
+				#pos/neg class for val?
+				for ind in appearance:
+					if sortdata['col0'].get_value(ind) == 1:
+						exists_pos = True
+						#print "exists_pos!", sortdata['col0'].get_value(ind), "index", ind
+					if sortdata['col0'].get_value(ind) == 0:
+						exists_neg = True
+						#print "exists_neg!", sortdata['col0'].get_value(ind), "index", ind
 
+				appearance_next = sortdata.index[sortdata[mycol] == val_next].tolist()
+				#pos/neg class for val_next?
+				for ind in appearance_next:
+					if sortdata['col0'].get_value(ind) == 1:
+						exists_pos_next = True
+						#print "exists_pos_next!", sortdata['col0'].get_value(ind), "index", ind
+					if sortdata['col0'].get_value(ind) == 0:
+						exists_neg_next = True
+						#print "exists_neg_next!", sortdata['col0'].get_value(ind), "index", ind
+
+				if (exists_pos and exists_neg_next) or (exists_neg and exists_pos_next):
+						cut= 0.5*(val+val_next)
+						print "type cut", type(cut)
+						print "cut:", cut
+						cutpoints.append(cut)	
+						print "cutpoints: ", cutpoints
+						print "listeneintrag ", cutpoints[-1]
+						if cutpoints[-1]==float(0.15):
+							print "YES"
+						print "hello cutpoint:", cut, val, val_next
+
+		print cutpoints
+		print "--------------------"
+
+		#LEVEL VARIABLES: each cutpoint creates a new column (x_i>=cutpoint?)
+		for point in cutpoints:
+			newcolumn = []
+			for val in data[mycol]:
+				if val >= point:
+					entry = 1
+				else:
+					entry = 0
+				newcolumn.append(entry)
+			binarydata[str(mycol)+'>='+str(point)]=newcolumn		
+
+		#INTERVAL VARIABLES: new colun for each pair of cut-points (cutpoint1<=x_i<=cutpoint2?)
+		for pair in itertools.combinations(cutpoints, 2):
+			newcolumn = []
+			for val in data[mycol]:
+				if pair[0]<=val and val <pair[1]:
+					entry = 1
+				else: 
+					entry = 0
+				newcolumn.append(entry)
+			binarydata[str(pair[0])+"<="+str(mycol)+"<"+str(pair[1])]=newcolumn
+	
+	#to csv
+	binarydata.to_csv(binCSV)
+	
+	mylist = []
+	nbr = 0.5*(0.1+0.2)
+	mylist.append(nbr)
+
+	print "wir rechnen:", mylist
+	print "nbr type", type(nbr)
+	print "nbr", nbr
+	print "list entry type", type(mylist[-1])
 
         print " binary output file:", binCSV
         print "---"
