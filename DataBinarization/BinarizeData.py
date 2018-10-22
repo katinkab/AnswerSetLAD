@@ -5,7 +5,6 @@ import pandas
 import csv
 import numpy as np
 import itertools
-from decimal import Decimal
 
 def binarize(originalCSV,
 	     binCSV):
@@ -24,14 +23,16 @@ def binarize(originalCSV,
 	
 	#read csv data file
 	data = pandas.read_csv(originalCSV, header=0, delimiter=",")	
-	nbrofrows = len(data)
-	print " number of rows:", nbrofrows
+	nbrofrows = len(data)	
+	nbrofcol = len(list(data))
+	print "  number of rows:", nbrofrows
+	print "  number of columns:", nbrofcol
+
 	#dataframe for output
 	binarydata = pandas.DataFrame(data['col0'])
 	binarydata.columns = ['classes']
 	
 	myheader = list(data)
-	print myheader
 
 	#iterate over columns in original data
 	for mycol in myheader:
@@ -43,8 +44,6 @@ def binarize(originalCSV,
 		myindex = 0		
 		cutpoints = []	
 
-		print "--------------------"
-		print "essential cutpoints:"
 		for val in sortdata[mycol]:
 			exists_pos = False
 			exists_neg = False
@@ -83,17 +82,7 @@ def binarize(originalCSV,
 
 				if (exists_pos and exists_neg_next) or (exists_neg and exists_pos_next):
 						cut= 0.5*(val+val_next)
-						print "type cut", type(cut)
-						print "cut:", cut
 						cutpoints.append(cut)	
-						print "cutpoints: ", cutpoints
-						print "listeneintrag ", cutpoints[-1]
-						if cutpoints[-1]==float(0.15):
-							print "YES"
-						print "hello cutpoint:", cut, val, val_next
-
-		print cutpoints
-		print "--------------------"
 
 		#LEVEL VARIABLES: each cutpoint creates a new column (x_i>=cutpoint?)
 		for point in cutpoints:
@@ -118,18 +107,14 @@ def binarize(originalCSV,
 			binarydata[str(pair[0])+"<="+str(mycol)+"<"+str(pair[1])]=newcolumn
 	
 	#to csv
-	binarydata.to_csv(binCSV)
-	
-	mylist = []
-	nbr = 0.5*(0.1+0.2)
-	mylist.append(nbr)
+	binarydata.to_csv(binCSV, index=False)
+	nbrofrows_bin = len(binarydata)
+	nbrofcols_bin = len(list(binarydata))
 
-	print "wir rechnen:", mylist
-	print "nbr type", type(nbr)
-	print "nbr", nbr
-	print "list entry type", type(mylist[-1])
-
+	print " "
         print " binary output file:", binCSV
+	print "  number of rows:", nbrofrows_bin
+	print "  number of columns:", nbrofcols_bin
         print "---"
 
 if __name__ == '__main__':
