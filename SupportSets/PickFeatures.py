@@ -30,6 +30,7 @@ def pickfeat(binCSV,
 	
 	#read csv data file
 	data = pandas.read_csv(binCSV, header=0, delimiter=",")	
+	myheader = list(data)
 	nbrofrows = len(data)	
 	nbrofcol = len(list(data))
 	print "  number of rows:", nbrofrows
@@ -54,17 +55,15 @@ def pickfeat(binCSV,
 	print columnlist
 
 	#new data frame
-	shortdata = pandas.DataFrame()
+	shortdata = pandas.DataFrame(data.iloc[:,0])
 
 	for col in columnlist:
-		shortdata.append(data.iloc[:2])
+		shortdata = pandas.concat([shortdata, data.iloc[:,col]], axis=1)
 
 	print shortdata
-	print data.iloc[0]
 
-	
-		
-
+	#write data frame to csv
+	shortdata.to_csv("2018/AnswerSetLAD/data/IrvineRepository/BreastCancerWis/breastcancerwis_short.csv", index=False)
 
 if __name__ == '__main__':
       pickfeat(*sys.argv[1:])
