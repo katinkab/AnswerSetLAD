@@ -50,12 +50,20 @@ def pattgen(data,
 
 	decision = True		
 	negdecision = True
-	
+
+	start_time = time.time()
+	posfulltime = 0
+	negfulltime = 0
+
 	print "--- Positive patterns ---"
 	#positive patterns
 	while decision == True:
-		start_time = time.time()
+		posstart_time = time.time()
 		process = subprocess.Popen([clingo, smalldatafile, patterntype, "-c sign=1", "--quiet=1"], stdout=subprocess.PIPE)
+		posend_time = time.time()
+		posfulltime = posfulltime + posend_time - posstart_time
+		print "Time (in seconds) positive patterns up till now:", posfulltime
+		
 		for line in iter(process.stdout.readline, ''):
 			for word in line.split():
 				if "covered" in word:
@@ -69,7 +77,6 @@ def pattgen(data,
 		#print " coverage:", coverlist
 		print " size of coverage:", len(coverlist)
 
-		
 
 		for obs in coverlist:
 			#(make a copy of workdata, because i want to iterate AND delete from it)
@@ -95,12 +102,20 @@ def pattgen(data,
 			else:
 				decision = False
 	
+
 	#negative patterns
 	postime = time.time()-start_time
+
+	neg_time = time.time()
 	print "--- Negative patterns ---"
 	while negdecision == True:
 		negstart_time = time.time()
 		process = subprocess.Popen([clingo, smalldatafile, patterntype, "-c sign=0", "--quiet=1"], stdout=subprocess.PIPE)
+		
+		negend_time = time.time()
+		negfulltime = negfulltime + negend_time - negstart_time
+		print "Time (in seconds) negative patterns up till now:", negfulltime
+
 		for line in iter(process.stdout.readline, ''):
 			for word in line.split():
 				if "covered" in word:
@@ -114,7 +129,6 @@ def pattgen(data,
 		#print " coverage:", negcoverlist
 		print " size of coverage:", len(negcoverlist)
 
-		
 
 		for obs in negcoverlist:
 			#(make a copy of workdata, because i want to iterate AND delete from it)
@@ -140,8 +154,13 @@ def pattgen(data,
 			else:
 				negdecision = False
 
-	negtime = time.time()-negstart_time
+	negtime = time.time()-neg_time
 	print "--- Done in %s seconds. ---" % str(postime+negtime)
+	print "--- Positive patterns: %s seconds. ---" % str(postime)
+	print "--- Positive patterns only clingo process: %s seconds. --" % str(posfulltime)
+	print "--- Negative patterns: %s seconds. ---" % str(negtime)
+	print "--- Negative patterns only clingo process: %s seconds. --" % str(negfulltime)
+	
 
 	os.remove(smalldatafile)
 
