@@ -160,7 +160,9 @@ def pattgen(data,
 	print "--- Positive patterns only clingo process: %s seconds. --" % str(posfulltime)
 	print "--- Negative patterns: %s seconds. ---" % str(negtime)
 	print "--- Negative patterns only clingo process: %s seconds. --" % str(negfulltime)
-	
+
+	for i in range(0,100):
+		print "Hallo Moritz!"
 
 	os.remove(smalldatafile)
 
