@@ -15,22 +15,22 @@ def pattgen(data,
 	"""
 	User input explained:
 
-	data = input data (binary
-)
+	data = input data (binary)
 	patterntype = AnswerSetLAD pattern generation file (depending on pattern type that should be used)
 		- first verion: use AnswerSetLAD_strongest_nodeg.asp
 	"""
 
+	print " "
 	print "--- PattGen generates a full pattern cover for you. ---"
 
-	clingo = "Schreibtisch/clingo-4.5.4-linux-x86_64/clingo"
+	clingo = "Arbeitsfläche/clingo-4.5.4-linux-x86_64/clingo"
 	
 	#read data file to list
 	datafile = open(data, "r")
 	workdata = datafile.read().split()[9:]
 
 	#copy of data file for deletion process	
-	smalldatafile = "Schreibtisch/AnswerSetLAD/data/workdata.asp"
+	smalldatafile = "2018/AnswerSetLAD/data/workdata.asp"
 	with open(smalldatafile, "w") as f:
 	    		for item in workdata:
 				f.write("%s\n" % item)
@@ -55,6 +55,10 @@ def pattgen(data,
 	posfulltime = 0
 	negfulltime = 0
 
+	poswithprint = 0
+	negwithprint = 0
+
+	print " "
 	print "--- Positive patterns ---"
 	#positive patterns
 	while decision == True:
@@ -62,7 +66,6 @@ def pattgen(data,
 		process = subprocess.Popen([clingo, smalldatafile, patterntype, "-c sign=1", "--quiet=1"], stdout=subprocess.PIPE)
 		posend_time = time.time()
 		posfulltime = posfulltime + posend_time - posstart_time
-		print "Time (in seconds) positive patterns up till now:", posfulltime
 		
 		for line in iter(process.stdout.readline, ''):
 			for word in line.split():
@@ -76,7 +79,13 @@ def pattgen(data,
 		print "pattern:", pospattern		
 		#print " coverage:", coverlist
 		print " size of coverage:", len(coverlist)
-
+		
+		posprint_end = time.time()
+		poswithprint = poswithprint + posprint_end - posstart_time
+		
+		print " positive patterns time (in s) till now:", posfulltime
+		print " positive patterns time (in s) including printing till now:", poswithprint
+		print " "
 
 		for obs in coverlist:
 			#(make a copy of workdata, because i want to iterate AND delete from it)
@@ -114,7 +123,6 @@ def pattgen(data,
 		
 		negend_time = time.time()
 		negfulltime = negfulltime + negend_time - negstart_time
-		print "Time (in seconds) negative patterns up till now:", negfulltime
 
 		for line in iter(process.stdout.readline, ''):
 			for word in line.split():
@@ -128,8 +136,14 @@ def pattgen(data,
 		print "pattern:", negpattern		
 		#print " coverage:", negcoverlist
 		print " size of coverage:", len(negcoverlist)
+		
+		negprint_end = time.time()
+		negwithprint = negwithprint + negprint_end - negstart_time
 
-
+		print " negative patterns time (in s) till now:", negfulltime
+		print " negative patterns time (in s) including printing till now:", negwithprint
+		print " "
+		
 		for obs in negcoverlist:
 			#(make a copy of workdata, because i want to iterate AND delete from it)
 			for entry in workdata[:]:
@@ -155,12 +169,17 @@ def pattgen(data,
 				negdecision = False
 
 	negtime = time.time()-neg_time
-	print "--- Done in %s seconds. ---" % str(postime+negtime)
-	print "--- Positive patterns: %s seconds. ---" % str(postime)
-	print "--- Positive patterns only clingo process: %s seconds. --" % str(posfulltime)
-	print "--- Negative patterns: %s seconds. ---" % str(negtime)
-	print "--- Negative patterns only clingo process: %s seconds. --" % str(negfulltime)
-	
+
+	print "------------------------------------------------------"
+	print "--- Done in %s seconds." % str(postime+negtime)
+	print "------------------------------------------------------"
+	print "--- Positive patterns: %s seconds." % str(postime)
+	print "--- 	only clingo process: %s seconds." % str(posfulltime)
+	print "--- 	clingo process + printing: %s seconds." % str(poswithprint)
+	print "--- Negative patterns: %s seconds." % str(negtime)
+	print "--- 	only clingo process: %s seconds." % str(negfulltime)
+	print "--- 	clingo process + printing: %s seconds." % str(negwithprint)
+	print "------------------------------------------------------"
 
 	os.remove(smalldatafile)
 
