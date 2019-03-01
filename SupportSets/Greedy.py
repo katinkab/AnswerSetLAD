@@ -6,6 +6,7 @@ import csv
 import numpy as np
 import os
 import re
+from scipy.optimize import minimize
 
 """
 This script can be used to calculate a support set from a binary data set consisting of level & interval variables. 
@@ -69,11 +70,17 @@ def support(suppCSV):
 		s.append(0)
 
 	#start loop
-	#def f(i): return 1/u[i]* sum()
+	#while s < mu :
+	l = [1,2,2,2,1]
+	f = sum(l)
+	print "sum:",f
 
-	while s < mu :
-		#def f(x): return -2 * x**2 + 4 * x
-		#max_x = scipy.optimize.fmin(lambda x: -f(x), 0)		
+	#hier fehlt ein c_ij im zähler! (durch 1 ersetzt)
+	
+	mini = min(1, 1/(mu[1]-s[1]))
+	print mini
+	#minimize(f, x0, args=(a, b, c))
+			
 
 
 
