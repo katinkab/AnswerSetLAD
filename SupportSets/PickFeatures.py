@@ -58,12 +58,12 @@ def pickfeat(binCSV,
 	shortdata = pandas.DataFrame(data.iloc[:,0])
 
 	for col in columnlist:
-		shortdata = pandas.concat([shortdata, data.iloc[:,col]], axis=1)
+		shortdata = pandas.concat([shortdata, data.iloc[:,col+1]], axis=1)
 
 	print shortdata
 
 	#write data frame to csv
-	shortdata.to_csv("2018/AnswerSetLAD/data/IrvineRepository/BreastCancerWis/breastcancerwis_short.csv", index=False)
+	shortdata.to_csv("data/IrvineRepository/BreastCancerWis/breastcancerwis_short_new.csv", index=False)
 
 if __name__ == '__main__':
       pickfeat(*sys.argv[1:])

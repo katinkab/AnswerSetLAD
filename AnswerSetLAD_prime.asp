@@ -52,4 +52,8 @@ homgood(S,B):-pat(S,B),#sum{homogeneity-100,X:del_covered(W,X,(S,B)),W=sign;homo
 %%%prevalence: pattern has to cover as many "right" obs as wanted in prevalence constant
 :-nbrrightobs(C),#sum{100,X:covered(W,X),W=sign}<prevalence*C.
 
+%%%prime pattern must cover at least one observation of the correct sign!
+:-not covered(sign,_).
+
 #show pat/2.
+#show covered/2.
