@@ -46,7 +46,7 @@ def support(suppCSV,classesCSV):
 	#filename
 	originalname = os.path.splitext(suppCSV)[0]
 	name = re.sub('\_suppcalc$', '', originalname)
-	name = re.sub("2018-2019/AnswerSetLAD/data/IrvineRepository/BreastCancerWis/","",name)
+	name = re.sub("Schreibtisch/AnswerSetLAD/data/IrvineRepository/BreastCancerWis/","",name)
 
 	print "name: ", name
 
@@ -62,20 +62,45 @@ def support(suppCSV,classesCSV):
 
 	#constraint coefficients c_ij (we use minimum(dist(cutpoint,p),dist(cutpoint,p'))/range attribute)!!!	
 	#hier brauchen wir original data set!
-	#als Test mit random numbers zwischen 0 und 1
 	c = np.ones((nbrofrows, nbrofcol))
-	#for rows in range(1,nbrofrows+1)
+	#so nutzen wir mehrere delimiters
+	delimiters = "<", ">", "="
+	regexPattern = '|'.join(map(re.escape, delimiters))
+
+	pair_delim = "(",",",")"
+	regexPair = '|'.join(map(re.escape, pair_delim))
 	print data.iloc[0][0]
-	#for rows in range(0,nbrofrows):
-	#		for cols in range(0,nbrofcol):
-	#			c[rows][cols]=random.random()
+	obs=re.split(regexPair,data.iloc[0][0])
+	firstobs = obs[1].strip()
+	secondobs = obs[2].strip()
+	print "first", firstobs
+	print "second", secondobs
+	
+	#hier rechne ich jetzt 
+	#min(abstand(1,5 zu wert von obs 5),abstand(1,5 zu wert von obs 6))/range col 1	
+	myhead = list(data)
+	for col in myhead[1:]:
+		entries = re.split(regexPattern,col)
+		for ind in range(0,len(entries)):
+			if entries[ind]!="":
+				if "col" in entries[ind]:
+					mycolumn = entries[ind]
+					print "this is the column we talk about:", mycolumn
+					print min(classes[mycolumn])
+					print max(classes[mycolumn])
+					print "RANGE:", abs(min(classes[mycolumn])-max(classes[mycolumn]))
+				else:
+					print "and this is the cut-point:", entries[ind]
+					print "distance obs I:", abs(float(entries[ind]) - float(classes[mycolumn][int(firstobs)]))
+					print "distance obs II:",abs(float(entries[ind]) - float(classes[mycolumn][int(secondobs)]))
+					print "minimum/range:", min(abs(float(entries[ind]) - float(classes[mycolumn][int(firstobs)])), abs(float(entries[ind]) - float(classes[mycolumn][int(secondobs)])))/ abs(min(classes[mycolumn])-max(classes[mycolumn]))
 
 	#right hand side coefficients (how different should the positive and negative be?) 
 	#1 \leq mu \leq HamDist(Omega^+, Omega^-)
 	#hier erstmal mit mu=1
 	mu = []
 	for ind in range(0,nbrofrows):
-		mu.append(3)
+		mu.append(1)
 
 	#initialize
 	y = []
