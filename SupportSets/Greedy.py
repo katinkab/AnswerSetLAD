@@ -32,16 +32,16 @@ def support(suppCSV,classesCSV):
 	#VORSICHT! Hier -1, da header und pairs mit drin!
 	nbrofrows = len(data)-1	
 	nbrofcol = len(list(data))-1
-	print "  number of rows:", nbrofrows
-	print "  number of columns:", nbrofcol
+	print "  data - number of rows:", nbrofrows
+	print "  data - number of columns:", nbrofcol
 
 	#read csv data file
 	classes = pandas.read_csv(classesCSV, header=0, delimiter=",")	
 	#VORSICHT! Hier -1, da header und pairs mit drin!
 	classes_nbrofrows = len(classes)-1	
 	classes_nbrofcol = len(list(classes))-1
-	print "  in classes - number of rows:", classes_nbrofrows
-	print "  in classes - number of columns:", classes_nbrofcol
+	print "  classes - number of rows:", classes_nbrofrows
+	print "  classes - number of columns:", classes_nbrofcol
 	
 	#filename
 	originalname = os.path.splitext(suppCSV)[0]
@@ -64,36 +64,46 @@ def support(suppCSV,classesCSV):
 	#hier brauchen wir original data set!
 	c = np.ones((nbrofrows, nbrofcol))
 	#so nutzen wir mehrere delimiters
+	#fuer cut-points
 	delimiters = "<", ">", "="
 	regexPattern = '|'.join(map(re.escape, delimiters))
-
+	#TO DO: for each pair
+	#fuer pairs
 	pair_delim = "(",",",")"
 	regexPair = '|'.join(map(re.escape, pair_delim))
-	print data.iloc[0][0]
-	obs=re.split(regexPair,data.iloc[0][0])
-	firstobs = obs[1].strip()
-	secondobs = obs[2].strip()
-	print "first", firstobs
-	print "second", secondobs
 	
-	#hier rechne ich jetzt 
-	#min(abstand(1,5 zu wert von obs 5),abstand(1,5 zu wert von obs 6))/range col 1	
-	myhead = list(data)
-	for col in myhead[1:]:
-		entries = re.split(regexPattern,col)
-		for ind in range(0,len(entries)):
-			if entries[ind]!="":
-				if "col" in entries[ind]:
-					mycolumn = entries[ind]
-					print "this is the column we talk about:", mycolumn
-					print min(classes[mycolumn])
-					print max(classes[mycolumn])
-					print "RANGE:", abs(min(classes[mycolumn])-max(classes[mycolumn]))
-				else:
-					print "and this is the cut-point:", entries[ind]
-					print "distance obs I:", abs(float(entries[ind]) - float(classes[mycolumn][int(firstobs)]))
-					print "distance obs II:",abs(float(entries[ind]) - float(classes[mycolumn][int(secondobs)]))
-					print "minimum/range:", min(abs(float(entries[ind]) - float(classes[mycolumn][int(firstobs)])), abs(float(entries[ind]) - float(classes[mycolumn][int(secondobs)])))/ abs(min(classes[mycolumn])-max(classes[mycolumn]))
+	for zeile in range(0,nbrofrows):
+		print data.iloc[zeile][0]
+		obs=re.split(regexPair,data.iloc[zeile][0])
+		firstobs = obs[1].strip()
+		secondobs = obs[2].strip()
+		#print "first", firstobs
+		#print "second", secondobs
+	
+		#hier rechne ich jetzt 
+		#min(abstand(1,5 zu wert von obs 5),abstand(1,5 zu wert von obs 6))/range col 1	
+		#TO DO: fuer zwei cut-points: mittelwert
+		myhead = list(data)
+		spalte = 0
+		for col in myhead[1:]:
+			entries = re.split(regexPattern,col)
+			for ind in range(0,len(entries)):
+				if entries[ind]!="":
+					if "col" in entries[ind]:
+						mycolumn = entries[ind]
+						#print "this is the column we talk about:", mycolumn
+						#print min(classes[mycolumn])
+						#print max(classes[mycolumn])
+						#print "RANGE:", abs(min(classes[mycolumn])-max(classes[mycolumn]))
+					else:
+						#print "and this is the cut-point:", entries[ind]
+						#print "distance obs I:", abs(float(entries[ind]) - float(classes[mycolumn][int(firstobs)]))
+						#print "distance obs II:",abs(float(entries[ind]) - float(classes[mycolumn][int(secondobs)]))
+						#print "FINAL VALUE: (minimum)/(range):", min(abs(float(entries[ind]) - float(classes[mycolumn][int(firstobs)])), abs(float(entries[ind]) - float(classes[mycolumn][int(secondobs)])))/ abs(min(classes[mycolumn])-max(classes[mycolumn]))
+						final_value=min(abs(float(entries[ind]) - float(classes[mycolumn][int(firstobs)])), abs(float(entries[ind]) - float(classes[mycolumn][int(secondobs)])))/ abs(min(classes[mycolumn])-max(classes[mycolumn]))
+						print len(c)
+						c[zeile][spalte]=final_value
+						spalte = spalte+1
 
 	#right hand side coefficients (how different should the positive and negative be?) 
 	#1 \leq mu \leq HamDist(Omega^+, Omega^-)
