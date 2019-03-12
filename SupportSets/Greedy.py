@@ -32,23 +32,23 @@ def support(suppCSV,classesCSV):
 	#VORSICHT! Hier -1, da header und pairs mit drin!
 	nbrofrows = len(data) #hier habe ich die -1 wieder weggenommen!!!! 
 	nbrofcol = len(list(data))-1
-	print "  data - number of rows:", nbrofrows
-	print "  data - number of columns:", nbrofcol
+	print "  _suppcalc.csv - number of rows:", nbrofrows
+	print "  _suppcalc.csv - number of columns:", nbrofcol
 
 	#read csv data file
 	classes = pandas.read_csv(classesCSV, header=0, delimiter=",")	
 	#VORSICHT! Hier -1, da header und pairs mit drin!
 	classes_nbrofrows = len(classes)	
 	classes_nbrofcol = len(list(classes))-1
-	print "  classes - number of rows:", classes_nbrofrows
-	print "  classes - number of columns:", classes_nbrofcol
+	print "  _classes.csv - number of rows:", classes_nbrofrows
+	print "  _classes.csv - number of columns:", classes_nbrofcol
 	
 	#filename
 	originalname = os.path.splitext(suppCSV)[0]
 	name = re.sub('\_suppcalc$', '', originalname)
-	name = re.sub("2018-2019/AnswerSetLAD/data/IrvineRepository/testMarch19/","",name)
+	name = re.sub("Schreibtisch/AnswerSetLAD/data/IrvineRepository/testMarch19/","",name)
 
-	print "name: ", name
+	print " name: ", name
 
 	
 	#select features
@@ -62,7 +62,7 @@ def support(suppCSV,classesCSV):
 
 	#constraint coefficients c_ij (we use minimum(dist(cutpoint,p),dist(cutpoint,p'))/range attribute)!!!	
 	#hier brauchen wir original data set!
-	c = np.ones((nbrofrows, nbrofcol+1))
+	c = np.ones((nbrofrows, nbrofcol))
 	#so nutzen wir mehrere delimiters
 	#fuer cut-points
 	delimiters = "<", ">", "="
@@ -71,62 +71,53 @@ def support(suppCSV,classesCSV):
 	#fuer pairs
 	pair_delim = "(",",",")"
 	regexPair = '|'.join(map(re.escape, pair_delim))
-	
+	#wir gehen alle paare durch
 	for zeile in range(0,nbrofrows):
-		print data.iloc[zeile][0]
+		#paar
 		obs=re.split(regexPair,data.iloc[zeile][0])
 		firstobs = obs[1].strip()
 		secondobs = obs[2].strip()
-		print "first", firstobs
-		print "second", secondobs
 	
 		#hier rechne ich jetzt 
 		#min(abstand(1,5 zu wert von obs 5),abstand(1,5 zu wert von obs 6))/range col 1	
-		#TO DO: fuer zwei cut-points: mittelwert
+		#fuer zwei cut-points: mittelwert
 		myhead = list(data)
 		spalte = 0
+		#wir gehen alle spalten aus _suppcalc durch
 		for col in myhead[1:]:
 			entries = re.split(regexPattern,col)
 			for ind in range(0,len(entries)):
 				if entries[ind]!="":
 					if "col" in entries[ind]:
+						#die aktuelle col
 						mycolumn = entries[ind]
 						newcolumn = True
 						#print "this is the column we talk about:", mycolumn
-						#print min(classes[mycolumn])
-						#print max(classes[mycolumn])
 						#print "RANGE:", abs(min(classes[mycolumn])-max(classes[mycolumn]))
 					else:
 						#print "and this is the cut-point:", entries[ind]
 						#print "distance obs I:", abs(float(entries[ind]) - float(classes[mycolumn][int(firstobs)]))
 						#print "distance obs II:",abs(float(entries[ind]) - float(classes[mycolumn][int(secondobs)]))
-						#print "FINAL VALUE: (minimum)/(range):", min(abs(float(entries[ind]) - float(classes[mycolumn][int(firstobs)])), abs(float(entries[ind]) - float(classes[mycolumn][int(secondobs)])))/ abs(min(classes[mycolumn])-max(classes[mycolumn]))
-						
 						if newcolumn == True:
-							print "Spalte:", spalte
-							spalte = spalte+1
+							#wir befinden uns bei einem neuen cut-point
 							myvalue=min(abs(float(entries[ind]) - float(classes[mycolumn][int(firstobs)])), abs(float(entries[ind]) - float(classes[mycolumn][int(secondobs)])))/ abs(min(classes[mycolumn])-max(classes[mycolumn]))
-							#print myvalue
 							final_value = myvalue
-							print "this is final:", final_value
+							c[zeile][spalte]=final_value
+							spalte=spalte+1
 						if newcolumn == False:
-							#print "wir addieren!"
+							#wir haben noch einen wert für den gleichen cut-point: wir nehmen den mittelwert!
 							mynextvalue=min(abs(float(entries[ind]) - float(classes[mycolumn][int(firstobs)])), abs(float(entries[ind]) - float(classes[mycolumn][int(secondobs)])))/ abs(min(classes[mycolumn])-max(classes[mycolumn]))
-							#print "mynextvalue:", mynextvalue
 							final_value=(myvalue+mynextvalue)/2
-							print "doch nicht! this is final:", final_value
-						
-						print "zeile", zeile	
-						c[zeile][spalte]=final_value
+							#wir überschreiben den vorherigen eintrag
+							c[zeile][spalte-1]=final_value
 						newcolumn = False
-	print c
 
 	#right hand side coefficients (how different should the positive and negative be?) 
 	#1 \leq mu \leq HamDist(Omega^+, Omega^-)
 	#hier erstmal mit mu=1
 	mu = []
 	for ind in range(0,nbrofrows):
-		mu.append(1)
+		mu.append(3)
 
 	#initialize
 	y = []
@@ -137,6 +128,7 @@ def support(suppCSV,classesCSV):
 	for ind in range(0,nbrofrows):
 		s.append(0)
 
+	print "--- columns to keep:"
 	#start loop
 	while s < mu:	
 		#vector mini enthält an stelle j das minimum aus 1 und 1/mu[j]-s[j]
@@ -153,7 +145,7 @@ def support(suppCSV,classesCSV):
 
 		#find index of maximum (DEN HABEN WIR GESUCHT!)
 		myindex =  f.index(max(f))
-		print myindex
+		print " ", myindex
 	
 		#update vectors
 		y[myindex]=1
