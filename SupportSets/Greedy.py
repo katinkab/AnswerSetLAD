@@ -30,7 +30,7 @@ def support(suppCSV,classesCSV):
 	#read csv data file
 	data = pandas.read_csv(suppCSV, header=0, delimiter=",")	
 	#VORSICHT! Hier -1, da header und pairs mit drin!
-	nbrofrows = len(data)-1	
+	nbrofrows = len(data) #hier habe ich die -1 wieder weggenommen!!!! 
 	nbrofcol = len(list(data))-1
 	print "  data - number of rows:", nbrofrows
 	print "  data - number of columns:", nbrofcol
@@ -38,7 +38,7 @@ def support(suppCSV,classesCSV):
 	#read csv data file
 	classes = pandas.read_csv(classesCSV, header=0, delimiter=",")	
 	#VORSICHT! Hier -1, da header und pairs mit drin!
-	classes_nbrofrows = len(classes)-1	
+	classes_nbrofrows = len(classes)	
 	classes_nbrofcol = len(list(classes))-1
 	print "  classes - number of rows:", classes_nbrofrows
 	print "  classes - number of columns:", classes_nbrofcol
@@ -46,7 +46,7 @@ def support(suppCSV,classesCSV):
 	#filename
 	originalname = os.path.splitext(suppCSV)[0]
 	name = re.sub('\_suppcalc$', '', originalname)
-	name = re.sub("Schreibtisch/AnswerSetLAD/data/IrvineRepository/BreastCancerWis/","",name)
+	name = re.sub("2018-2019/AnswerSetLAD/data/IrvineRepository/testMarch19/","",name)
 
 	print "name: ", name
 
@@ -62,7 +62,7 @@ def support(suppCSV,classesCSV):
 
 	#constraint coefficients c_ij (we use minimum(dist(cutpoint,p),dist(cutpoint,p'))/range attribute)!!!	
 	#hier brauchen wir original data set!
-	c = np.ones((nbrofrows, nbrofcol))
+	c = np.ones((nbrofrows, nbrofcol+1))
 	#so nutzen wir mehrere delimiters
 	#fuer cut-points
 	delimiters = "<", ">", "="
@@ -77,8 +77,8 @@ def support(suppCSV,classesCSV):
 		obs=re.split(regexPair,data.iloc[zeile][0])
 		firstobs = obs[1].strip()
 		secondobs = obs[2].strip()
-		#print "first", firstobs
-		#print "second", secondobs
+		print "first", firstobs
+		print "second", secondobs
 	
 		#hier rechne ich jetzt 
 		#min(abstand(1,5 zu wert von obs 5),abstand(1,5 zu wert von obs 6))/range col 1	
@@ -91,6 +91,7 @@ def support(suppCSV,classesCSV):
 				if entries[ind]!="":
 					if "col" in entries[ind]:
 						mycolumn = entries[ind]
+						newcolumn = True
 						#print "this is the column we talk about:", mycolumn
 						#print min(classes[mycolumn])
 						#print max(classes[mycolumn])
@@ -100,10 +101,25 @@ def support(suppCSV,classesCSV):
 						#print "distance obs I:", abs(float(entries[ind]) - float(classes[mycolumn][int(firstobs)]))
 						#print "distance obs II:",abs(float(entries[ind]) - float(classes[mycolumn][int(secondobs)]))
 						#print "FINAL VALUE: (minimum)/(range):", min(abs(float(entries[ind]) - float(classes[mycolumn][int(firstobs)])), abs(float(entries[ind]) - float(classes[mycolumn][int(secondobs)])))/ abs(min(classes[mycolumn])-max(classes[mycolumn]))
-						final_value=min(abs(float(entries[ind]) - float(classes[mycolumn][int(firstobs)])), abs(float(entries[ind]) - float(classes[mycolumn][int(secondobs)])))/ abs(min(classes[mycolumn])-max(classes[mycolumn]))
-						print len(c)
+						
+						if newcolumn == True:
+							print "Spalte:", spalte
+							spalte = spalte+1
+							myvalue=min(abs(float(entries[ind]) - float(classes[mycolumn][int(firstobs)])), abs(float(entries[ind]) - float(classes[mycolumn][int(secondobs)])))/ abs(min(classes[mycolumn])-max(classes[mycolumn]))
+							#print myvalue
+							final_value = myvalue
+							print "this is final:", final_value
+						if newcolumn == False:
+							#print "wir addieren!"
+							mynextvalue=min(abs(float(entries[ind]) - float(classes[mycolumn][int(firstobs)])), abs(float(entries[ind]) - float(classes[mycolumn][int(secondobs)])))/ abs(min(classes[mycolumn])-max(classes[mycolumn]))
+							#print "mynextvalue:", mynextvalue
+							final_value=(myvalue+mynextvalue)/2
+							print "doch nicht! this is final:", final_value
+						
+						print "zeile", zeile	
 						c[zeile][spalte]=final_value
-						spalte = spalte+1
+						newcolumn = False
+	print c
 
 	#right hand side coefficients (how different should the positive and negative be?) 
 	#1 \leq mu \leq HamDist(Omega^+, Omega^-)
