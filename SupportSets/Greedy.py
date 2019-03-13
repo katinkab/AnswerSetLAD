@@ -13,7 +13,7 @@ This script can be used to calculate a support set from a binary data set consis
 We use the greedy algorithm from Hammer et al. "An implementation of LAD".
 """
 
-def support(suppCSV,classesCSV):
+def support(suppCSV,classesCSV,OutFile):
 	"""
 	User input explained:
 
@@ -21,6 +21,7 @@ def support(suppCSV,classesCSV):
 		- the rows are pairs of pos and neg observations	
 		- columns are the difference of the pairs in the binary variables
 	classesCSV = CSV classes file (for calculation of constraint coeffcients)
+	OutFile = name for output file
 
 	"""
 
@@ -46,9 +47,14 @@ def support(suppCSV,classesCSV):
 	#filename
 	originalname = os.path.splitext(suppCSV)[0]
 	name = re.sub('\_suppcalc$', '', originalname)
-	name = re.sub("Schreibtisch/AnswerSetLAD/data/IrvineRepository/testMarch19/","",name)
+	name = re.sub("2018-2019/AnswerSetLAD/data/IrvineRepository/BreastCancerWis/","",name)
 
 	print " name: ", name
+
+	#outputfile
+	out_file= [""]
+    	out_file+= ["%% Columns to keep from file %s"%suppCSV]
+	out_file+= [""]
 
 	
 	#select features
@@ -117,7 +123,7 @@ def support(suppCSV,classesCSV):
 	#hier erstmal mit mu=1
 	mu = []
 	for ind in range(0,nbrofrows):
-		mu.append(3)
+		mu.append(70)
 
 	#initialize
 	y = []
@@ -146,12 +152,17 @@ def support(suppCSV,classesCSV):
 		#find index of maximum (DEN HABEN WIR GESUCHT!)
 		myindex =  f.index(max(f))
 		print " ", myindex
+		out_file+= [myindex]
 	
 		#update vectors
 		y[myindex]=1
 
 		for ind in range(0,nbrofrows):
 			s[ind]=s[ind]+c[ind][myindex]
+
+	#write file
+	with open(OutFile, 'w') as f:
+           	f.writelines("\n".join(out_file))
 
 	print "--- done."
 				
