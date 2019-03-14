@@ -7,7 +7,7 @@ import numpy as np
 import itertools
 
 def binarize(originalCSV,
-	     binCSV):
+	     binCSV,*Interval):
 	"""
 	User input explained:
 
@@ -15,6 +15,7 @@ def binarize(originalCSV,
 		- the input file needs to have the classes in the first column ('col0');
 		- all columns have to be named 'col0', 'col1',...
 	binCSV = data file name for binary output file
+	Interval = do we want interval variables? if "interval" -> we calculate them, if not -> no 
 	"""
 
         print "--- binarize"
@@ -24,7 +25,7 @@ def binarize(originalCSV,
 	#read csv data file
 	data = pandas.read_csv(originalCSV, header=0, delimiter=",")	
 	nbrofrows = len(data)	
-	nbrofcol = len(list(data))
+	nbrofcol = len(list(data))-1
 	print "  number of rows:", nbrofrows
 	print "  number of columns:", nbrofcol
 
@@ -35,7 +36,7 @@ def binarize(originalCSV,
 	myheader = list(data)
 
 	#iterate over columns in original data
-	for mycol in myheader:
+	for mycol in myheader[1:]:
 		#COLUMN1
 		#cutpoints t_s=1/2*(v_(s-1)+v_s)
 		sortdata = data.sort_values(by=[mycol])
@@ -95,21 +96,22 @@ def binarize(originalCSV,
 				newcolumn.append(entry)
 			binarydata[str(mycol)+'>='+str(point)]=newcolumn		
 
+		if "interval" in Interval:
 		#INTERVAL VARIABLES: new colun for each pair of cut-points (cutpoint1<=x_i<=cutpoint2?)
-		for pair in itertools.combinations(cutpoints, 2):
-			newcolumn = []
-			for val in data[mycol]:
-				if pair[0]<=val and val <pair[1]:
-					entry = 1
-				else: 
-					entry = 0
-				newcolumn.append(entry)
-			binarydata[str(pair[0])+"<="+str(mycol)+"<"+str(pair[1])]=newcolumn
+			for pair in itertools.combinations(cutpoints, 2):
+				newcolumn = []
+				for val in data[mycol]:
+					if pair[0]<=val and val <pair[1]:
+						entry = 1
+					else: 
+						entry = 0
+					newcolumn.append(entry)
+				binarydata[str(pair[0])+"<="+str(mycol)+"<"+str(pair[1])]=newcolumn
 	
 	#to csv
 	binarydata.to_csv(binCSV, index=False)
 	nbrofrows_bin = len(binarydata)
-	nbrofcols_bin = len(list(binarydata))
+	nbrofcols_bin = len(list(binarydata))-1
 
 	print " "
         print " binary output file:", binCSV

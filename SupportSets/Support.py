@@ -31,14 +31,16 @@ def support(binCSV,
 	#read csv data file
 	data = pandas.read_csv(binCSV, header=0, delimiter=",")	
 	nbrofrows = len(data)	
-	nbrofcol = len(list(data))
+	nbrofcol = len(list(data))-1
 	print "  number of rows:", nbrofrows
 	print "  number of columns:", nbrofcol
 	
 	#filename
 	originalname = os.path.splitext(binCSV)[0]
-	name = re.sub('\_binary$', '', originalname)
-	name = re.sub("data/","",name)
+	name = re.sub('\_binary_disjoint_nointerval$', '', originalname)
+	name = re.sub("2018-2019/AnswerSetLAD/data/IrvineRepository/BrestCancerWis/disjoint","",name)
+
+	print "name: ", name
 
 	#dataframe for output
 	myheader = list(data)
@@ -77,25 +79,22 @@ def support(binCSV,
 					suppdata = suppdata.append(df2, ignore_index=True)
 
 	suppdata = suppdata.rename(columns={ suppdata.columns[0]: "rows" })	
-	print suppdata
 	nbrsupprows = len(suppdata)
-	nbrsuppcols = len(list(suppdata))
+	nbrsuppcols = len(list(suppdata))-1
 	print "  suppdata number of rows:", nbrsupprows
 	print "  suppdata number of cols:", nbrsuppcols
 
 	suppdata.to_csv(suppCSV, index=False)
 
 	#write .asp file for support set calculation
-	aspfile = open("data/SupportCalculation/"+name+"_suppcalc.asp","w+") 
-	myint = 0
-	for ourcol in list(suppdata)[1:]:
-		print suppdata[ourcol]
-		for ourrow in range(0,nbrsupprows):
+	#aspfile = open("2018-2019/AnswerSetLAD/data/IrvineRepository/testMarch19/"+name+"_suppcalc.asp","w+") 
+	#myint = 0
+	#for ourcol in list(suppdata)[1:]:
+	#	for ourrow in range(0,nbrsupprows):
 			#entry(Zeile, Spalte, Entry)
-			print "entry(", ourrow, "," , myint ,"," , suppdata[ourcol][ourrow] , ")."
-			aspfile.write("entry("+str(ourrow)+","+str(myint)+","+str(suppdata[ourcol][ourrow])+").\n")
-		myint = myint+1
-	aspfile.close()
+	#		aspfile.write("entry("+str(ourrow)+","+str(myint)+","+str(suppdata[ourcol][ourrow])+").\n")
+	#	myint = myint+1
+	#aspfile.close()
 		
 
 

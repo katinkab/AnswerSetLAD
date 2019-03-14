@@ -123,7 +123,7 @@ def support(suppCSV,classesCSV,OutFile):
 	#hier erstmal mit mu=1
 	mu = []
 	for ind in range(0,nbrofrows):
-		mu.append(70)
+		mu.append(20)
 
 	#initialize
 	y = []
@@ -152,7 +152,7 @@ def support(suppCSV,classesCSV,OutFile):
 		#find index of maximum (DEN HABEN WIR GESUCHT!)
 		myindex =  f.index(max(f))
 		print " ", myindex
-		out_file+= [myindex]
+		out_file+= ["%s"%str(myindex)]
 	
 		#update vectors
 		y[myindex]=1
