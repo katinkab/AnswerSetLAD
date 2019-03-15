@@ -1,0 +1,25 @@
+
+% Columns to keep from file 2018-2019/AnswerSetLAD/data/IrvineRepository/HeartDisease/disjoint_nointerval/heartdiseasecleveland_disjoint_suppcalc.csv
+
+196
+37
+266
+299
+302
+38
+298
+197
+297
+198
+301
+296
+39
+300
+40
+295
+303
+281
+282
+285
+287
+267
