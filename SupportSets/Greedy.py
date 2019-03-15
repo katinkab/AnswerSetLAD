@@ -47,7 +47,7 @@ def support(suppCSV,classesCSV,OutFile):
 	#filename
 	originalname = os.path.splitext(suppCSV)[0]
 	name = re.sub('\_suppcalc$', '', originalname)
-	name = re.sub("2018-2019/AnswerSetLAD/data/IrvineRepository/BreastCancerWis/","",name)
+	name = re.sub("2018-2019/AnswerSetLAD/data/IrvineRepository/HeartDisease/disjoint_nointerval/","",name)
 
 	print " name: ", name
 
@@ -60,16 +60,7 @@ def support(suppCSV,classesCSV,OutFile):
 	#select features
 	#input
 
-	#objective function coefficients u_i (we use the variance of the attribute)
-	u = []
-	#wir fügen für jede column die varianz/stdabweichung in den vektor u ein
-	for ind in range(1,nbrofcol+1):
-		u.append(data.iloc[:,ind].std())
-
-	#constraint coefficients c_ij (we use minimum(dist(cutpoint,p),dist(cutpoint,p'))/range attribute)!!!	
-	#hier brauchen wir original data set!
-	c = np.ones((nbrofrows, nbrofcol))
-	#so nutzen wir mehrere delimiters
+	#diese delimiter pakete brauchen wir für u und c
 	#fuer cut-points
 	delimiters = "<", ">", "="
 	regexPattern = '|'.join(map(re.escape, delimiters))
@@ -77,53 +68,68 @@ def support(suppCSV,classesCSV,OutFile):
 	#fuer pairs
 	pair_delim = "(",",",")"
 	regexPair = '|'.join(map(re.escape, pair_delim))
+
+	#objective function coefficients u_i (we use the variance of the attribute)
+	u = np.zeros(nbrofcol)
+	#wir fügen für jede column die varianz/stdabweichung der betroffenen column im original data set in den vektor u ein
+	index_u = 0
+	for col in list(data)[1:]:
+		entries = re.split(regexPattern,col)
+		for ind in range(0,len(entries)):
+			if entries[ind]!="":
+				if "col" in entries[ind]:
+					#die aktuelle col
+					#mycolumn = entries[ind]
+					#print "this is index u:", index_u
+					mycolumn = entries[ind]
+					#print "this is column:", mycolumn
+					#standardabweichung/varianz von column mycolumn in original data file
+					vari = classes[mycolumn].std()
+					#print "this is standardabweichung:", vari
+					u[index_u] = vari
+					index_u = index_u+1	
+
+	#constraint coefficients c_ij (we use minimum(dist(cutpoint,p),dist(cutpoint,p'))/range attribute)!!!	
+	#hier brauchen wir original data set!
+
+	c = np.zeros((nbrofrows, nbrofcol))
+	
 	#wir gehen alle paare durch
 	for zeile in range(0,nbrofrows):
 		#paar
 		obs=re.split(regexPair,data.iloc[zeile][0])
 		firstobs = obs[1].strip()
 		secondobs = obs[2].strip()
-	
-		#hier rechne ich jetzt 
-		#min(abstand(1,5 zu wert von obs 5),abstand(1,5 zu wert von obs 6))/range col 1	
-		#fuer zwei cut-points: mittelwert
-		myhead = list(data)
 		spalte = 0
 		#wir gehen alle spalten aus _suppcalc durch
-		for col in myhead[1:]:
+		for col in list(data)[1:]:
 			entries = re.split(regexPattern,col)
-			for ind in range(0,len(entries)):
-				if entries[ind]!="":
-					if "col" in entries[ind]:
-						#die aktuelle col
-						mycolumn = entries[ind]
-						newcolumn = True
-						#print "this is the column we talk about:", mycolumn
-						#print "RANGE:", abs(min(classes[mycolumn])-max(classes[mycolumn]))
-					else:
-						#print "and this is the cut-point:", entries[ind]
-						#print "distance obs I:", abs(float(entries[ind]) - float(classes[mycolumn][int(firstobs)]))
-						#print "distance obs II:",abs(float(entries[ind]) - float(classes[mycolumn][int(secondobs)]))
-						if newcolumn == True:
-							#wir befinden uns bei einem neuen cut-point
-							myvalue=min(abs(float(entries[ind]) - float(classes[mycolumn][int(firstobs)])), abs(float(entries[ind]) - float(classes[mycolumn][int(secondobs)])))/ abs(min(classes[mycolumn])-max(classes[mycolumn]))
-							final_value = myvalue
-							c[zeile][spalte]=final_value
-							spalte=spalte+1
-						if newcolumn == False:
-							#wir haben noch einen wert für den gleichen cut-point: wir nehmen den mittelwert!
-							mynextvalue=min(abs(float(entries[ind]) - float(classes[mycolumn][int(firstobs)])), abs(float(entries[ind]) - float(classes[mycolumn][int(secondobs)])))/ abs(min(classes[mycolumn])-max(classes[mycolumn]))
-							final_value=(myvalue+mynextvalue)/2
-							#wir überschreiben den vorherigen eintrag
-							c[zeile][spalte-1]=final_value
-						newcolumn = False
+			#liste des attributes (name)
+			myattribute = [s for s in entries if "col" in s][0]
+			#spread des attributes
+			spread_attribute = abs(min(classes[myattribute])-max(classes[myattribute]))
+			#hier eine liste aller cutpoints
+			mycutpoints = [s for s in entries if "." in s]
+			#min(abstand(cutpoint zu wert von firstobs),abstand(cutpoint zu wert von secondobs))/range attribute	
+			if len(mycutpoints) == 1:
+				final_value=min(abs(float(mycutpoints[0]) - float(classes[myattribute][int(firstobs)])), abs(float(mycutpoints[0]) - float(classes[myattribute][int(secondobs)])))/ spread_attribute
+				c[zeile][spalte] = final_value	
+	
+			#[fuer zwei cut-points: mittelwert]
+			if len(mycutpoints) == 2:
+				first_value=min(abs(float(mycutpoints[0]) - float(classes[myattribute][int(firstobs)])), abs(float(mycutpoints[0]) - float(classes[myattribute][int(secondobs)])))/ spread_attribute
+				second_value=min(abs(float(mycutpoints[1]) - float(classes[myattribute][int(firstobs)])), abs(float(mycutpoints[1]) - float(classes[myattribute][int(secondobs)])))/ spread_attribute
+				final_value=(first_value+second_value)/2
+				c[zeile][spalte] = final_value
+
+			spalte = spalte+1
 
 	#right hand side coefficients (how different should the positive and negative be?) 
 	#1 \leq mu \leq HamDist(Omega^+, Omega^-)
 	#hier erstmal mit mu=1
 	mu = []
 	for ind in range(0,nbrofrows):
-		mu.append(20)
+		mu.append(5)
 
 	#initialize
 	y = []
@@ -137,28 +143,42 @@ def support(suppCSV,classesCSV,OutFile):
 	print "--- columns to keep:"
 	#start loop
 	while s < mu:	
+		#print "s<mu: ", s,"<",mu
 		#vector mini enthält an stelle j das minimum aus 1 und 1/mu[j]-s[j]
-		#hier fehlt ein c_ij im zähler! (durch 1 ersetzt)
 		mini = np.zeros((nbrofrows, nbrofcol))
 		for rows in range(0,nbrofrows):
 			for cols in range(0,nbrofcol):
 				mini[rows][cols] = min(1, c[rows][cols]/(mu[rows]-s[rows]))
+				#print "mini[",rows,"][",cols,"]:", mini[rows][cols]
+
 
 		#vector f enthält die gewichtete summe der einträge von mini
 		f = []
 		for i in range(0,nbrofcol):
-			f.append(1/u[i]*sum(mini[j][i] for j in range(0,nbrofrows) if (mu[j] - s[j]) > 0))
+			#summe
+			mysum = sum(mini[j][i] for j in range(0,nbrofrows) if (mu[j] - s[j]) > 0)
+			#print "summe für i =", i,":", mysum
+			f.append(1/u[i]*mysum)
+		#print "vector f:", f
 
-		#find index of maximum (DEN HABEN WIR GESUCHT!)
+		#hier wandle ich ab: berachte nur die einträge in f die nicht schon gewählt wurden (d.h. bereits in y sind). sonst immer wieder gleiche column ausgewählt.
+		#---------------------------------
+		keepcols = np.nonzero(y)[0]
+		
+		for ind in range(0,len(keepcols)):
+			f[keepcols[ind]] = 0
+		#---------------------------------
+		#find index of maximum entry of f (DEN HABEN WIR GESUCHT!)
 		myindex =  f.index(max(f))
-		print " ", myindex
+		print "  ", myindex
 		out_file+= ["%s"%str(myindex)]
 	
 		#update vectors
 		y[myindex]=1
+		#print "new y:", y
 
 		for ind in range(0,nbrofrows):
-			s[ind]=s[ind]+c[ind][myindex]
+			s[ind]=s[ind]+c[ind][myindex]	
 
 	#write file
 	with open(OutFile, 'w') as f:

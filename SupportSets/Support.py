@@ -25,7 +25,7 @@ def support(binCSV,
 	suppCSV = data file name for output file consisting of data frame needed for support set calculation
 	"""
 
-	print "--- binarize"
+	print "--- calculate support matrix"
         print " input file:", binCSV
 	
 	#read csv data file
@@ -37,8 +37,8 @@ def support(binCSV,
 	
 	#filename
 	originalname = os.path.splitext(binCSV)[0]
-	name = re.sub('\_binary_disjoint_nointerval$', '', originalname)
-	name = re.sub("2018-2019/AnswerSetLAD/data/IrvineRepository/BrestCancerWis/disjoint","",name)
+	name = re.sub('\_disjoint_binary_nointerval$', '', originalname)
+	name = re.sub("2018-2019/AnswerSetLAD/data/IrvineRepository/HeartDisease/disjoint_nointerval/","",name)
 
 	print "name: ", name
 
