@@ -153,5 +153,21 @@ katinkab@turing:~$ python 2018-2019/AnswerSetLAD/SupportSets/PickFeatures_Greedy
   number of rows: 341
   number of columns: 269
 
+_______________________________________________________________
+
+Disjoint.py (-> bupa_final.csv)
+
+katinkab@turing:~$ python 2018-2019/AnswerSetLAD/DataBinarization/Disjoint.py 2018-2019/AnswerSetLAD/data/IrvineRepository/BUPALiver/disjoint_nointerval/bupa_short_binary.csv 2018-2019/AnswerSetLAD/data/IrvineRepository/BUPALiver/disjoint_nointerval/bupa_final.csv
+--- remove duplicates
+ input file: 2018-2019/AnswerSetLAD/data/IrvineRepository/BUPALiver/disjoint_nointerval/bupa_short_binary.csv
+  _classes.csv - number of rows: 341
+  _classes.csv - number of columns: 14
+  no repetition - number of rows: 29
+  no repetition - number of columns: 14
+  disjoint - number of rows: 15
+  disjoint - number of columns: 14
+--- done.
+
+
 
 
