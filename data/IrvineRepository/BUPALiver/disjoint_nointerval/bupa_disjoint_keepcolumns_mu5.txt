@@ -1,0 +1,17 @@
+
+% Columns to keep from file 2018-2019/AnswerSetLAD/data/IrvineRepository/BUPALiver/disjoint_nointerval/bupa_suppcalc_disjoint.csv
+
+268
+267
+0
+266
+265
+264
+1
+263
+2
+21
+181
+262
+20
+261

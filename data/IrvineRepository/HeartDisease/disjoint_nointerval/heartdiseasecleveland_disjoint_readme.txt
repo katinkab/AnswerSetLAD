@@ -89,4 +89,16 @@ real	5m18.186s
 user	5m17.516s
 sys	0m0.408s
 
+______________________________________________________
+
+PickFeatures_Greedy.py
+
+katinkab@turing:~$ python 2018-2019/AnswerSetLAD/SupportSets/PickFeatures_Greedy.py 2018-2019/AnswerSetLAD/data/IrvineRepository/HeartDisease/disjoint_nointerval/heartdiseasecleveland_disjoint_binary_nointerval.csv 2018-2019/AnswerSetLAD/data/IrvineRepository/HeartDisease/disjoint_nointerval/heartdiseasecleveland_disjoint_keepcolumns.txt 2018-2019/AnswerSetLAD/data/IrvineRepository/HeartDisease/disjoint_nointerval/heartdiseasecleveland_short_binary.csv
+--- write small binary file
+ from input file: 2018-2019/AnswerSetLAD/data/IrvineRepository/HeartDisease/disjoint_nointerval/heartdiseasecleveland_disjoint_binary_nointerval.csv
+ and support set: 2018-2019/AnswerSetLAD/data/IrvineRepository/HeartDisease/disjoint_nointerval/heartdiseasecleveland_disjoint_keepcolumns.txt
+  number of rows: 297
+  number of columns: 305
+
+
 

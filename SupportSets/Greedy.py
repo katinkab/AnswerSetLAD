@@ -43,13 +43,6 @@ def support(suppCSV,classesCSV,OutFile):
 	classes_nbrofcol = len(list(classes))-1
 	print "  _classes.csv - number of rows:", classes_nbrofrows
 	print "  _classes.csv - number of columns:", classes_nbrofcol
-	
-	#filename
-	originalname = os.path.splitext(suppCSV)[0]
-	name = re.sub('\_suppcalc$', '', originalname)
-	name = re.sub("2018-2019/AnswerSetLAD/data/IrvineRepository/HeartDisease/disjoint_nointerval/","",name)
-
-	print " name: ", name
 
 	#outputfile
 	out_file= [""]
@@ -129,7 +122,7 @@ def support(suppCSV,classesCSV,OutFile):
 	#hier erstmal mit mu=1
 	mu = []
 	for ind in range(0,nbrofrows):
-		mu.append(5)
+		mu.append(10)
 
 	#initialize
 	y = []

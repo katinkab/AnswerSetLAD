@@ -39,7 +39,7 @@ def support(classesCSV,disjointCSV):
 	print "  no repetition - number of columns:", norepeatclasses_nbrofcol
 
 	#delete columns that appear in both classes
-	disjointclasses=norepeatclasses.drop_duplicates(subset=["col1","col2","col3","col4","col5","col6","col7","col8","col9"], keep=False)
+	disjointclasses=norepeatclasses.drop_duplicates(subset=["col1","col2","col3","col4","col5","col6","col7","col8","col9","col10","col11","col12","col13"], keep=False)
 	disjointclasses_nbrofrows = len(disjointclasses)	
 	disjointclasses_nbrofcol = len(list(disjointclasses))-1
 	print "  disjoint - number of rows:", disjointclasses_nbrofrows

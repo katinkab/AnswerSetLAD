@@ -8,8 +8,8 @@ import os
 import re
 
 """
-This script can be used to calculate a support set from a binary data set consisting of level & interval variables. 
-We use the greedy algorithm from Hammer et al. "An implementation of LAD".
+This script can be used to calculate a matrix of pairwise difference vectors from a binary data set consisting of level & interval variables. 
+In a next step we can calculate a support set from it.
 """
 
 def support(binCSV,
@@ -36,11 +36,11 @@ def support(binCSV,
 	print "  number of columns:", nbrofcol
 	
 	#filename
-	originalname = os.path.splitext(binCSV)[0]
-	name = re.sub('\_disjoint_binary_nointerval$', '', originalname)
-	name = re.sub("2018-2019/AnswerSetLAD/data/IrvineRepository/HeartDisease/disjoint_nointerval/","",name)
+	#originalname = os.path.splitext(binCSV)[0]
+	#name = re.sub('\_disjoint_binary_nointerval$', '', originalname)
+	#name = re.sub("2018-2019/AnswerSetLAD/data/IrvineRepository/HeartDisease/disjoint_nointerval/","",name)
 
-	print "name: ", name
+	#print "name: ", name
 
 	#dataframe for output
 	myheader = list(data)

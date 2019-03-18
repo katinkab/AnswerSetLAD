@@ -84,3 +84,15 @@ real	3m31.329s
 user	3m30.472s
 sys	0m0.460s
 
+___________________________________________
+
+PickFeatures_Greedy.py
+
+katinkab@turing:~$ python 2018-2019/AnswerSetLAD/SupportSets/PickFeatures_Greedy.py 2018-2019/AnswerSetLAD/data/IrvineRepository/BreastCancerWis/disjoint_nointerval/breastcancerwis_binary_disjoint_nointerval.csv 2018-2019/AnswerSetLAD/data/IrvineRepository/BreastCancerWis/disjoint_nointerval/breastcancerwis_keepcolumns_mu5.txt 2018-2019/AnswerSetLAD/data/IrvineRepository/BreastCancerWis/disjoint_nointerval/breastcancerwis_short_binary.csv
+--- write small binary file
+ from input file: 2018-2019/AnswerSetLAD/data/IrvineRepository/BreastCancerWis/disjoint_nointerval/breastcancerwis_binary_disjoint_nointerval.csv
+ and support set: 2018-2019/AnswerSetLAD/data/IrvineRepository/BreastCancerWis/disjoint_nointerval/breastcancerwis_keepcolumns_mu5.txt
+  number of rows: 449
+  number of columns: 72
+
+

@@ -32,16 +32,9 @@ def pickfeat(binCSV,
 	data = pandas.read_csv(binCSV, header=0, delimiter=",")	
 	myheader = list(data)
 	nbrofrows = len(data)	
-	nbrofcol = len(list(data))
+	nbrofcol = len(list(data))-1
 	print "  number of rows:", nbrofrows
 	print "  number of columns:", nbrofcol
-	
-	#filename
-	originalname = os.path.splitext(binCSV)[0]
-	name = re.sub('\_fullbinary$', '', originalname)
-	name = re.sub("data/IrvineRepository/BreastCancerWis/","",name)
-
-	print "name: ", name
 
 	#support.asp file
 	with open(support, 'r') as myfile:
