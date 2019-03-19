@@ -56,18 +56,18 @@ def support(binCSV,
 	for ind in range(0,nbrofrows):
 		#positive class
 		if data['classes'][ind] == 1:
-			#we consider all rows with higher indices
-			for higherind in range(ind+1,nbrofrows):
+			#we consider all rows of opposite sign
+			for newind in range(0,nbrofrows):
 				#all observations of opposite class
 				diffvect = []
-				if data['classes'][higherind] == 0:
+				if data['classes'][newind] == 0:
 					#calculate difference vector
 					diffvect = data.iloc[[ind]]
-					diffvect = diffvect.append(data.iloc[higherind])
+					diffvect = diffvect.append(data.iloc[newind])
 					diffvect = diffvect.sum(axis=0)
 					supp = []
 					#replace classes by names of rows that are in focus
-					supp.append((ind, higherind))
+					supp.append((ind, newind))
 					for entry in diffvect[1:]:
 						#no difference = 0 and 2
 						#different = 1
