@@ -199,6 +199,46 @@ real	0m0.018s
 user	0m0.012s
 sys	0m0.004s
 
+__________________________________________________________________________________
+
+AnswerSetLAD_predict.asp
+
+for primecover.asp:
+
+katinkab@turing:~$ ./Arbeitsfläche/clingo-4.5.4-linux-x86_64/clingo 2018-2019/AnswerSetLAD/data/IrvineRepository/BUPALiver/disjoint_nointerval/crossvalidation/testset_last5.asp 2018-2019/AnswerSetLAD/data/IrvineRepository/BUPALiver/disjoint_nointerval/crossvalidation/primecover.asp 2018-2019/AnswerSetLAD/AnswerSetLAD_predict.asp -n 0
+clingo version 4.5.4
+Reading from ...rval/crossvalidation/testset_last5.asp ...
+Solving...
+Answer: 1
+predict((1,11),correctclass(0)) predict((0,12),correctclass(1)) predict((0,13),correctclass(0)) predict((0,14),correctclass(0)) predict((0,15),correctclass(1)) correctpos(0,of(2)) correctneg(2,of(3)) falsepos(1,of(3)) falseneg(2,of(2))
+SATISFIABLE
+
+Models       : 1     
+Calls        : 1
+Time         : 0.009s (Solving: 0.00s 1st Model: 0.00s Unsat: 0.00s)
+CPU Time     : 0.000s
+
+----------------------------
+
+for primecover_highoccurence.asp
+
+katinkab@turing:~$ ./Arbeitsfläche/clingo-4.5.4-linux-x86_64/clingo 2018-2019/AnswerSetLAD/data/IrvineRepository/BUPALiver/disjoint_nointerval/crossvalidation/testset_last5.asp 2018-2019/AnswerSetLAD/data/IrvineRepository/BUPALiver/disjoint_nointerval/crossvalidation/primecover_highoccurence.asp 2018-2019/AnswerSetLAD/AnswerSetLAD_predict.asp -n 0
+clingo version 4.5.4
+Reading from ...rval/crossvalidation/testset_last5.asp ...
+Solving...
+Answer: 1
+predict((1,11),correctclass(0)) predict((0,12),correctclass(1)) predict((0,13),correctclass(0)) predict((0,14),correctclass(0)) predict((0,15),correctclass(1)) correctpos(0,of(2)) correctneg(2,of(3)) falsepos(1,of(3)) falseneg(2,of(2))
+SATISFIABLE
+
+Models       : 1     
+Calls        : 1
+Time         : 0.008s (Solving: 0.00s 1st Model: 0.00s Unsat: 0.00s)
+CPU Time     : 0.000s
+
+
+
+
+
 
 
 
