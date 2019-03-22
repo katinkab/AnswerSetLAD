@@ -28,7 +28,7 @@ def getallpatterns(FnameDATA,
 	homint = int(Hom)
 	prevint = int(Prev)
 		
-	clingo = "Schreibtisch/clingo-4.5.4-linux-x86_64/clingo"
+	clingo = "Arbeitsfläche/clingo-4.5.4-linux-x86_64/clingo"
 
 	outfile= [""]
     	outfile+= ["%% All Patterns of type %s from input file %s for cover calculations"%(FnamePAT, FnameDATA)]
@@ -53,7 +53,7 @@ def getallpatterns(FnameDATA,
 					outfile+= [" ", line.rstrip()]
   			else:
 				#print ""
-				outfile+= [""]
+				#outfile+= [""]
     				break
 
 	print "...done..."
@@ -71,13 +71,13 @@ def getallpatterns(FnameDATA,
   			if line !="":
 				if "Models" in line:
 					#print "  degree %i:"%deg, line.rstrip()
-					outfile+= ["  degree %i:"%deg, line.rstrip()]
+					outfile+= ["  degree %i:"%deg,line.rstrip()]
 				elif "pat" in line:
 					#print " ", line.rstrip()
 					outfile+= [" ", line.rstrip()]
   			else:
 				#print ""
-				outfile+= [""]
+				#outfile+= [""]
     				break
 
 	with open(OutFile, 'w') as f:

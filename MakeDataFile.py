@@ -24,18 +24,19 @@ def txt2asp(FnameTXT,
 	delimiter=","
 
 	for line in txt_file:
-		sign = line[0]
-		obsnbr = obsnbr+1
-		index = 0
-		featnbr = 0
-		while index < len(line):
-			index = line.find(delimiter, index)
-			if index == -1: 
-				break 
-			featnbr = featnbr+1			
-			featval = line[index+1]
-			index += len(delimiter)    
-			asp_file+= ["i(%s,%s,%s,%s)."%(str(sign), obsnbr, featnbr, featval)]
+		if "classes" not in line:
+			sign = line[0]
+			obsnbr = obsnbr+1
+			index = 0
+			featnbr = 0
+			while index < len(line):
+				index = line.find(delimiter, index)
+				if index == -1: 
+					break 
+				featnbr = featnbr+1			
+				featval = line[index+1]
+				index += len(delimiter)    
+				asp_file+= ["i(%s,%s,%s,%s)."%(str(sign), obsnbr, featnbr, featval)]
 
 	if FnameASP==None:
         	return "\n".join(asp_file)
