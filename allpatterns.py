@@ -5,6 +5,7 @@ import sys
 
 def getallpatterns(FnameDATA,
 		   FnamePAT,
+	           OutFile,
 	           DegLowerBound,
 		   DegUpperBound,
 		   Hom=100,
@@ -18,6 +19,7 @@ def getallpatterns(FnameDATA,
 	print " upper bound degree:", DegUpperBound
 	print " homogeneity in percent (lower bound):", Hom
 	print " prevalence in percent (lower bound):", Prev
+	print "	output file:", OutFile
 	print ""
 	
 	low = int(DegLowerBound)
@@ -26,9 +28,14 @@ def getallpatterns(FnameDATA,
 	homint = int(Hom)
 	prevint = int(Prev)
 		
-	clingo = "Arbeitsfläche/clingo-4.5.4-linux-x86_64/clingo"
+	clingo = "Schreibtisch/clingo-4.5.4-linux-x86_64/clingo"
+
+	outfile= [""]
+    	outfile+= ["%% All Patterns of type %s from input file %s for cover calculations"%(FnamePAT, FnameDATA)]
+	outfile+= [""]
 
 	print " positive patterns:"
+	outfile+= [" positive patterns:"]
 
 	for deg in range(low,high+1):
 		if "quiet" in IsQuiet:
@@ -39,15 +46,20 @@ def getallpatterns(FnameDATA,
   			line = process.stdout.readline()
   			if line !="":
 				if "Models" in line:
-					print "  degree %i:"%deg, line.rstrip()
+					#print "  degree %i:"%deg, line.rstrip()
+					outfile+= ["  degree %i:"%deg, line.rstrip()]
 				elif "pat" in line:
-					print " ", line.rstrip()
+					#print " ", line.rstrip()
+					outfile+= [" ", line.rstrip()]
   			else:
-				print ""
+				#print ""
+				outfile+= [""]
     				break
 
-	print ""
+	print "...done..."
+	outfile+= [""]
 	print " negative patterns:"
+	outfile+= [" negative patterns:"]
 
 	for deg in range(low,high+1):
 		if "quiet" in IsQuiet:
@@ -58,12 +70,18 @@ def getallpatterns(FnameDATA,
   			line = process.stdout.readline()
   			if line !="":
 				if "Models" in line:
-					print "  degree %i:"%deg, line.rstrip()
+					#print "  degree %i:"%deg, line.rstrip()
+					outfile+= ["  degree %i:"%deg, line.rstrip()]
 				elif "pat" in line:
-					print " ", line.rstrip()
+					#print " ", line.rstrip()
+					outfile+= [" ", line.rstrip()]
   			else:
-				print ""
+				#print ""
+				outfile+= [""]
     				break
+
+	with open(OutFile, 'w') as f:
+           		f.writelines("\n".join(outfile))
 
         print "--- getallpatterns done. "
 
