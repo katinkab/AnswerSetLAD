@@ -1,0 +1,176 @@
+
+% All Patterns of type 2018-2019/AnswerSetLAD/AnswerSetLAD_prime.asp from input file 2018-2019/AnswerSetLAD/data/IrvineRepository/HD/mu3/train_first33.asp for cover calculations
+
+ positive patterns:
+ 
+pat(5,1) covered(1,2) covered(1,15) covered(1,25) covered(1,28) covered(1,32)
+  degree 1:
+Models       : 1
+  degree 2:
+Models       : 0
+ 
+pat(3,1) pat(1,1) pat(8,1) covered(1,5) covered(1,6) covered(1,26) covered(1,28) covered(1,29) covered(1,31)
+ 
+pat(3,1) pat(2,0) pat(1,1) covered(1,26) covered(1,31)
+ 
+pat(2,0) pat(1,1) pat(6,1) covered(1,26) covered(1,31)
+ 
+pat(4,0) pat(2,0) pat(6,1) covered(1,15) covered(1,20) covered(1,26)
+ 
+pat(3,1) pat(4,1) pat(1,1) covered(1,5) covered(1,31)
+ 
+pat(2,0) pat(4,1) pat(1,1) covered(1,31)
+ 
+pat(3,1) pat(4,1) pat(2,1) covered(1,5) covered(1,23) covered(1,30)
+ 
+pat(3,1) pat(8,0) pat(4,1) covered(1,30)
+ 
+pat(8,0) pat(4,1) pat(2,1) covered(1,30)
+ 
+pat(7,1) pat(8,0) pat(4,1) covered(1,30)
+ 
+pat(3,1) pat(6,0) pat(1,1) covered(1,13) covered(1,28) covered(1,29)
+  degree 3:
+Models       : 11
+ 
+pat(4,0) pat(7,1) pat(6,1) pat(8,1) covered(1,2) covered(1,6) covered(1,15) covered(1,26) covered(1,32)
+ 
+pat(3,1) pat(7,1) pat(2,1) pat(8,1) covered(1,2) covered(1,5) covered(1,6) covered(1,23) covered(1,28) covered(1,29)
+ 
+pat(3,1) pat(4,0) pat(7,1) pat(8,1) covered(1,2) covered(1,6) covered(1,26) covered(1,28) covered(1,29)
+ 
+pat(4,0) pat(1,1) pat(6,1) pat(8,1) covered(1,6) covered(1,26) covered(1,32)
+ 
+pat(1,0) pat(4,0) pat(7,1) pat(2,1) covered(1,2)
+ 
+pat(1,0) pat(3,1) pat(7,1) pat(2,1) covered(1,2) covered(1,23) covered(1,30)
+ 
+pat(1,0) pat(4,0) pat(7,1) pat(6,1) covered(1,2) covered(1,15) covered(1,20)
+ 
+pat(1,0) pat(4,0) pat(7,1) pat(8,1) covered(1,2) covered(1,15)
+ 
+pat(1,0) pat(4,0) pat(3,0) pat(6,1) covered(1,15)
+ 
+pat(1,0) pat(4,0) pat(3,0) pat(8,1) covered(1,15)
+ 
+pat(4,0) pat(3,0) pat(6,1) pat(8,1) covered(1,15) covered(1,32)
+ 
+pat(4,0) pat(7,1) pat(3,0) pat(6,1) covered(1,15) covered(1,24) covered(1,32)
+ 
+pat(1,0) pat(2,0) pat(3,0) pat(8,1) covered(1,3) covered(1,15) covered(1,25)
+ 
+pat(1,0) pat(4,0) pat(2,0) pat(8,1) covered(1,15)
+ 
+pat(7,1) pat(2,0) pat(3,0) pat(6,1) covered(1,3) covered(1,15) covered(1,25)
+ 
+pat(2,0) pat(3,0) pat(6,1) pat(8,1) covered(1,3) covered(1,15) covered(1,25)
+ 
+pat(3,1) pat(4,0) pat(2,0) pat(8,1) covered(1,26)
+ 
+pat(7,1) pat(2,0) pat(3,0) pat(8,1) covered(1,3) covered(1,15) covered(1,25)
+ 
+pat(4,0) pat(7,1) pat(2,0) pat(8,1) covered(1,15) covered(1,26)
+ 
+pat(7,1) pat(2,0) pat(1,1) pat(8,1) covered(1,26) covered(1,31)
+ 
+pat(2,0) pat(3,0) pat(4,1) pat(8,1) covered(1,3) covered(1,25)
+ 
+pat(7,1) pat(2,0) pat(3,0) pat(4,1) covered(1,3) covered(1,25)
+ 
+pat(1,0) pat(3,1) pat(8,0) pat(6,1) covered(1,20) covered(1,30)
+ 
+pat(3,1) pat(2,0) pat(8,0) pat(6,1) covered(1,20)
+ 
+pat(7,1) pat(2,0) pat(8,0) pat(6,1) covered(1,20)
+ 
+pat(1,0) pat(7,1) pat(8,0) pat(2,1) covered(1,30)
+ 
+pat(1,0) pat(7,1) pat(8,0) pat(6,1) covered(1,20) covered(1,30)
+ 
+pat(7,1) pat(8,0) pat(3,0) pat(6,1) covered(1,24)
+ 
+pat(1,0) pat(8,0) pat(2,1) pat(6,1) covered(1,30)
+ 
+pat(1,0) pat(4,0) pat(8,0) pat(6,1) covered(1,20)
+ 
+pat(3,1) pat(7,1) pat(6,0) pat(8,1) covered(1,28) covered(1,29)
+ 
+pat(3,1) pat(7,1) pat(6,0) pat(2,1) covered(1,13) covered(1,28) covered(1,29)
+  degree 4:
+Models       : 32
+  degree 5:
+Models       : 0
+  degree 6:
+Models       : 0
+  degree 7:
+Models       : 0
+  degree 8:
+Models       : 0
+
+ negative patterns:
+ 
+pat(7,0) covered(0,1) covered(0,9) covered(0,10) covered(0,11) covered(0,12) covered(0,16) covered(0,19) covered(0,33)
+  degree 1:
+Models       : 1
+ 
+pat(2,0) pat(6,0) covered(0,4) covered(0,8) covered(0,10) covered(0,12) covered(0,22)
+ 
+pat(6,0) pat(3,0) covered(0,7) covered(0,8) covered(0,10) covered(0,12) covered(0,22) covered(0,27)
+ 
+pat(1,0) pat(6,0) covered(0,4) covered(0,8) covered(0,12) covered(0,16) covered(0,19)
+  degree 2:
+Models       : 3
+ 
+pat(1,0) pat(3,0) pat(2,1) covered(0,18)
+ 
+pat(1,0) pat(8,0) pat(3,0) covered(0,8) covered(0,11) covered(0,12)
+ 
+pat(2,0) pat(1,1) pat(3,0) covered(0,10) covered(0,22)
+ 
+pat(2,0) pat(8,0) pat(1,1) covered(0,22)
+ 
+pat(2,0) pat(8,0) pat(3,0) covered(0,8) covered(0,11) covered(0,12) covered(0,22)
+ 
+pat(3,0) pat(4,1) pat(2,1) covered(0,1) covered(0,17) covered(0,18)
+ 
+pat(1,1) pat(3,0) pat(4,1) covered(0,1) covered(0,17)
+ 
+pat(8,0) pat(3,0) pat(4,1) covered(0,11)
+ 
+pat(2,0) pat(8,0) pat(4,1) covered(0,11)
+  degree 3:
+Models       : 9
+ 
+pat(4,0) pat(3,0) pat(5,0) pat(8,1) covered(0,10) covered(0,27)
+ 
+pat(3,0) pat(5,0) pat(2,1) pat(8,1) covered(0,1) covered(0,17) covered(0,18) covered(0,27)
+ 
+pat(1,1) pat(3,0) pat(5,0) pat(8,1) covered(0,1) covered(0,10) covered(0,17) covered(0,27)
+ 
+pat(1,0) pat(4,0) pat(5,0) pat(2,1) covered(0,9) covered(0,16) covered(0,19)
+ 
+pat(1,0) pat(4,0) pat(3,0) pat(5,0) covered(0,8) covered(0,12)
+ 
+pat(1,0) pat(4,0) pat(5,0) pat(8,1) covered(0,9) covered(0,19)
+ 
+pat(1,0) pat(4,0) pat(8,0) pat(2,1) covered(0,16)
+ 
+pat(3,1) pat(8,0) pat(1,1) pat(6,1) covered(0,14)
+ 
+pat(1,0) pat(2,0) pat(3,1) pat(8,1) covered(0,21)
+ 
+pat(2,0) pat(4,0) pat(3,0) pat(5,0) covered(0,8) covered(0,10) covered(0,12) covered(0,22)
+ 
+pat(1,0) pat(2,0) pat(3,1) pat(4,1) covered(0,21)
+  degree 4:
+Models       : 11
+ 
+pat(3,1) pat(4,0) pat(8,0) pat(2,1) pat(6,1) covered(0,14)
+  degree 5:
+Models       : 1
+  degree 6:
+Models       : 0
+  degree 7:
+Models       : 0
+  degree 8:
+Models       : 0
