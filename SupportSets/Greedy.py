@@ -29,7 +29,7 @@ def support(suppCSV,classesCSV,OutFile,MyMu):
 	print "--- feature selection"
         print " input file:", suppCSV
 	
-	mymu = MyMu
+	mymu = int(MyMu)
 	print " mu =", mymu
 	
 	#read csv data file
