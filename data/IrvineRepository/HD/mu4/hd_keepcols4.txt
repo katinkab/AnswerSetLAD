@@ -1,0 +1,15 @@
+
+% Columns to keep from file 2018-2019/AnswerSetLAD/data/IrvineRepository/HD/hd_suppcalc.csv
+
+  196
+  37
+  266
+  299
+  302
+  38
+  298
+  197
+  198
+  297
+  301
+
