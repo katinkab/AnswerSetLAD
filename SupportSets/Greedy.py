@@ -13,7 +13,7 @@ This script can be used to calculate a support set from a binary data set consis
 We use the greedy algorithm from Hammer et al. "An implementation of LAD".
 """
 
-def support(suppCSV,classesCSV,OutFile):
+def support(suppCSV,classesCSV,OutFile,MyMu):
 	"""
 	User input explained:
 
@@ -22,11 +22,15 @@ def support(suppCSV,classesCSV,OutFile):
 		- columns are the difference of the pairs in the binary variables
 	classesCSV = CSV classes file (for calculation of constraint coeffcients)
 	OutFile = name for output file
+	MyMu = value for mu (by how many features should each pair of observations be seperated?)
 
 	"""
 
 	print "--- feature selection"
         print " input file:", suppCSV
+	
+	mymu = MyMu
+	print " mu =", mymu
 	
 	#read csv data file
 	data = pandas.read_csv(suppCSV, header=0, delimiter=",")	
@@ -122,7 +126,7 @@ def support(suppCSV,classesCSV,OutFile):
 	#hier erstmal mit mu=1
 	mu = []
 	for ind in range(0,nbrofrows):
-		mu.append(10)
+		mu.append(mymu)
 
 	#initialize
 	y = []
