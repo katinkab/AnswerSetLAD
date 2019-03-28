@@ -1,0 +1,168 @@
+
+% All Patterns of type 2018-2019/AnswerSetLAD/AnswerSetLAD_prime.asp from input file 2018-2019/AnswerSetLAD/data/IrvineRepository/BLD/mu5/train_disjoint.asp for cover calculations
+
+ positive patterns:
+ 
+pat(1,1) covered(1,11)
+  degree 1:
+Models       : 1
+ 
+pat(6,0) pat(2,1) covered(1,12)
+ 
+pat(5,1) pat(4,0) covered(1,8)
+ 
+pat(9,1) pat(4,0) covered(1,8)
+ 
+pat(7,1) pat(4,0) covered(1,8)
+  degree 2:
+Models       : 4
+ 
+pat(14,1) pat(15,0) pat(4,0) covered(1,8)
+ 
+pat(12,1) pat(10,0) pat(4,0) covered(1,8)
+ 
+pat(12,1) pat(15,0) pat(4,0) covered(1,8)
+ 
+pat(11,0) pat(5,1) pat(3,0) covered(1,8)
+ 
+pat(11,0) pat(9,1) pat(3,0) covered(1,8)
+ 
+pat(11,0) pat(7,1) pat(3,0) covered(1,8)
+ 
+pat(15,1) pat(10,0) pat(14,0) covered(1,4)
+  degree 3:
+Models       : 7
+ 
+pat(11,0) pat(13,1) pat(15,0) pat(3,0) covered(1,8)
+ 
+pat(11,0) pat(13,1) pat(15,0) pat(4,0) covered(1,8)
+ 
+pat(11,0) pat(13,1) pat(10,0) pat(14,0) covered(1,4)
+ 
+pat(11,0) pat(14,1) pat(15,0) pat(3,0) covered(1,8)
+ 
+pat(11,0) pat(12,1) pat(15,0) pat(3,0) covered(1,8)
+ 
+pat(11,0) pat(12,1) pat(10,0) pat(3,0) covered(1,8)
+  degree 4:
+Models       : 6
+  degree 5:
+Models       : 0
+  degree 6:
+Models       : 0
+  degree 7:
+Models       : 0
+  degree 8:
+Models       : 0
+  degree 9:
+Models       : 0
+  degree 10:
+Models       : 0
+  degree 11:
+Models       : 0
+  degree 12:
+Models       : 0
+  degree 13:
+Models       : 0
+  degree 14:
+Models       : 0
+  degree 15:
+Models       : 0
+
+ negative patterns:
+ 
+pat(2,0) covered(0,13)
+ 
+pat(11,1) covered(0,1) covered(0,9)
+ 
+pat(10,1) covered(0,3) covered(0,7)
+  degree 1:
+Models       : 3
+ 
+pat(3,1) pat(1,0) covered(0,10)
+ 
+pat(8,0) pat(6,1) covered(0,2)
+ 
+pat(4,1) pat(1,0) covered(0,9) covered(0,10)
+ 
+pat(4,1) pat(3,0) covered(0,9)
+ 
+pat(13,0) pat(6,1) covered(0,2) covered(0,5)
+ 
+pat(13,0) pat(8,1) covered(0,5)
+ 
+pat(15,1) pat(12,1) covered(0,7)
+ 
+pat(12,1) pat(9,0) covered(0,7)
+ 
+pat(12,1) pat(5,0) covered(0,7)
+ 
+pat(12,1) pat(7,0) covered(0,7)
+ 
+pat(15,1) pat(14,1) covered(0,6) covered(0,7)
+ 
+pat(14,1) pat(12,0) covered(0,6)
+ 
+pat(14,1) pat(9,0) covered(0,6) covered(0,7)
+ 
+pat(14,1) pat(5,0) covered(0,6) covered(0,7)
+ 
+pat(14,1) pat(7,0) covered(0,6) covered(0,7)
+  degree 2:
+Models       : 15
+ 
+pat(15,0) pat(9,0) pat(6,1) covered(0,1) covered(0,2) covered(0,5)
+ 
+pat(8,1) pat(15,0) pat(9,0) covered(0,1) covered(0,5)
+ 
+pat(8,1) pat(15,0) pat(7,0) covered(0,1) covered(0,5)
+ 
+pat(15,0) pat(7,0) pat(6,1) covered(0,1) covered(0,2) covered(0,5)
+ 
+pat(8,1) pat(15,0) pat(5,0) covered(0,1) covered(0,5)
+ 
+pat(15,0) pat(5,0) pat(6,1) covered(0,1) covered(0,2) covered(0,5)
+ 
+pat(13,1) pat(15,0) pat(5,0) covered(0,1)
+ 
+pat(13,1) pat(15,0) pat(9,0) covered(0,1)
+ 
+pat(13,1) pat(15,0) pat(7,0) covered(0,1)
+ 
+pat(15,0) pat(12,0) pat(6,1) covered(0,1) covered(0,2) covered(0,5)
+ 
+pat(8,1) pat(15,0) pat(12,0) covered(0,1) covered(0,5)
+ 
+pat(13,1) pat(15,0) pat(12,0) covered(0,1)
+ 
+pat(15,0) pat(14,0) pat(6,1) covered(0,1) covered(0,2) covered(0,5)
+ 
+pat(8,1) pat(15,0) pat(14,0) covered(0,1) covered(0,5)
+ 
+pat(13,1) pat(15,0) pat(14,0) covered(0,1)
+  degree 3:
+Models       : 15
+  degree 4:
+Models       : 0
+  degree 5:
+Models       : 0
+  degree 6:
+Models       : 0
+  degree 7:
+Models       : 0
+  degree 8:
+Models       : 0
+  degree 9:
+Models       : 0
+  degree 10:
+Models       : 0
+  degree 11:
+Models       : 0
+  degree 12:
+Models       : 0
+  degree 13:
+Models       : 0
+  degree 14:
+Models       : 0
+  degree 15:
+Models       : 0

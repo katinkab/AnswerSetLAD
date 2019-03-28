@@ -1,0 +1,18 @@
+
+% Columns to keep from file 2018-2019/AnswerSetLAD/data/IrvineRepository/BLD/bld_suppcalc.csv
+
+268
+0
+267
+266
+265
+1
+264
+2
+263
+21
+181
+262
+3
+261
+20
