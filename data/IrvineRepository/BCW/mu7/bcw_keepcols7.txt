@@ -1,0 +1,26 @@
+
+% Columns to keep from file 2018-2019/AnswerSetLAD/data/IrvineRepository/BCW/bcw_suppcalc.csv
+
+71
+70
+69
+68
+39
+38
+67
+30
+37
+15
+66
+36
+63
+29
+55
+60
+53
+28
+65
+44
+20
+7
+27

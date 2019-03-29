@@ -1,0 +1,5 @@
+
+% Columns to keep from file 2018-2019/AnswerSetLAD/data/IrvineRepository/testMarch19/testMarch19_suppcalc.csv
+
+7
+8

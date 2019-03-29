@@ -12,7 +12,7 @@ import random
 This script can be used to find duplicates in rows of data set
 """
 
-def support(classesCSV,disjointCSV):
+def disjoint(classesCSV,disjointCSV):
 	"""
 	User input explained:
 
@@ -53,4 +53,4 @@ def support(classesCSV,disjointCSV):
 
 
 if __name__ == '__main__':
-      support(*sys.argv[1:])
+      disjoint(*sys.argv[1:])

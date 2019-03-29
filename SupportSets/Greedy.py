@@ -26,7 +26,7 @@ def support(suppCSV,classesCSV,OutFile,MyMu):
 
 	"""
 
-	print "--- feature selection"
+	print "--- greedy feature selection"
         print " input file:", suppCSV
 	
 	mymu = int(MyMu)
