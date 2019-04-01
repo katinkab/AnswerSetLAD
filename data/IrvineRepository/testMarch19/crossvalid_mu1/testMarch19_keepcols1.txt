@@ -1,0 +1,5 @@
+
+% Columns to keep from file Schreibtisch/AnswerSetLAD/data/IrvineRepository/testMarch19/testMarch19_suppcalc.csv
+
+7
+8

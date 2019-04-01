@@ -1,0 +1,11 @@
+
+% Columns to keep from file Schreibtisch/AnswerSetLAD/data/IrvineRepository/HD/hd_suppcalc.csv
+
+196
+37
+266
+299
+302
+298
+38
+197

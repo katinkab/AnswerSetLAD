@@ -1,0 +1,14 @@
+primecover(2,1,2).
+primecover(1,1,3).
+primecover(1,1,4).
+primecover(12,1,4).
+primecover(18,1,4).
+primecover(23,1,4).
+primecover(2,1,5).
+primecover(1,0,1).
+primecover(1,0,2).
+primecover(2,0,2).
+primecover(8,0,3).
+primecover(1,0,4).
+primecover(10,0,4).
+primecover(1,0,6).

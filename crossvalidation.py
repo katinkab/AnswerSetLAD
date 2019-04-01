@@ -17,16 +17,16 @@ import ReadAllPatternForCoverCalc as ReadAll
 
 def crossvalidation(binCSV, classesCSV, suppCSV, MyMu, MyN):
 
-	clingo = "Arbeitsfläche/clingo-4.5.4-linux-x86_64/clingo"
+	clingo = "Schreibtisch/clingo-4.5.4-linux-x86_64/clingo"
 
 	#patternfile name
-	PATname = "2018-2019/AnswerSetLAD/AnswerSetLAD_prime.asp"
+	PATname = "Schreibtisch/AnswerSetLAD/AnswerSetLAD_prime.asp"
 	
 	#filename
 	originalname = os.path.splitext(binCSV)[0]
 	name = re.sub('\_binary$', '', originalname)
-	directory = "2018-2019/AnswerSetLAD/data/IrvineRepository/BCW/"
-	subdirectory = "mu6/"
+	directory = "Schreibtisch/AnswerSetLAD/data/IrvineRepository/HD/"
+	subdirectory = "crossvalid_mu3/"
 	name = re.sub(directory,"",name)
 	
 	print "----------------------------------------"
@@ -77,13 +77,20 @@ def crossvalidation(binCSV, classesCSV, suppCSV, MyMu, MyN):
 	patternOut = directory + subdirectory + "allprimes.txt"
 	nbrFeatures = len(list(mytrain))-1
 	allpatterns.getallpatterns(trainDisjointASP, PATname, patternOut,1,nbrFeatures,100,0)
+	print "HALLO!"
 	#make readable input for the asp-files
 	Pat_forCover = directory + subdirectory + "allprimes_forcover.asp"
 	ReadAll.patternoutput_to_coverinput(patternOut, Pat_forCover)
 
 	#make primecover.asp
-	MyPrimecoverASP = "2018-2019/AnswerSetLAD/AnswerSetLAD_primecover.asp"
-	Myprocess = subprocess.Popen([clingo, trainDisjointASP, Pat_forCover, MyPrimecoverASP ], stdout=subprocess.PIPE)
+	MyPrimecoverASP = "Schreibtisch/AnswerSetLAD/AnswerSetLAD_primecover.asp"
+	Myprocess = subprocess.Popen([clingo, trainDisjointASP, Pat_forCover, MyPrimecoverASP, "--quiet=1" ], stdout=subprocess.PIPE)
+	while True:
+  		myline = Myprocess.stdout.readline()
+ 		if "primecover" in myline:
+    			print "OUTPUT!!!:", line.rstrip()
+ 		else:
+   			break
 	stdout = Myprocess.communicate()[0]
 	print 'STDOUT:{}'.format(stdout)
     	primecoverfile= [stdout]
@@ -92,8 +99,8 @@ def crossvalidation(binCSV, classesCSV, suppCSV, MyMu, MyN):
            	f.writelines("\n".join(primecoverfile))
 
 	#make primecover_highoccurence.asp
-	MyPrimeHighASP = "2018-2019/AnswerSetLAD/AnswerSetLAD_primecover_highoccurence.asp"
-	MyHighprocess = subprocess.Popen([clingo, trainDisjointASP, Pat_forCover, MyPrimeHighASP ], stdout=subprocess.PIPE)
+	MyPrimeHighASP = "Schreibtisch/AnswerSetLAD/AnswerSetLAD_primecover_highoccurence.asp"
+	MyHighprocess = subprocess.Popen([clingo, trainDisjointASP, Pat_forCover, MyPrimeHighASP, "--quiet=1" ], stdout=subprocess.PIPE)
 	highstdout = MyHighprocess.communicate()[0]
 	print 'STDOUT:{}'.format(highstdout)
     	primehighfile= [highstdout]
