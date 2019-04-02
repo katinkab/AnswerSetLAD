@@ -25,24 +25,22 @@ except ImportError:
 global interation
 global NbrOfFeatures
 
-def importdata(binCSV, classesCSV, suppCSV, MyMu):
+def importdata(Mydirectory, Mysubdirectory, binCSV, classesCSV, suppCSV, MyMu):
 	
 	#filename
 	originalname = os.path.splitext(binCSV)[0]
-	name = re.sub('\_binary_nointerval$', '', originalname)
-	name = re.sub(directory,"",name)
 	
 	print "----------------------------------------"
-	print " name of the data set: ", name
+	print " name of the data set: ", originalname
 
 
 	print "--------- crossvalidation --------------"
 	print " binary file: ", binCSV
 	print " classes file: ", classesCSV
 	print " suppcalc file: ", suppCSV
-	keepTXT = directory + subdirectory + name + "_keepcols1.txt"
+	keepTXT = Mydirectory + Mysubdirectory + "keepcols.txt"
 	print " keepcolumns outfile: ", keepTXT
-	shortOutCSV = directory + subdirectory + name+ "_short.csv"
+	shortOutCSV = Mydirectory + Mysubdirectory + "short.csv"
 	print " short outfile: ", shortOutCSV
 	print " m =", MyMu	
 
@@ -66,7 +64,7 @@ def importdata(binCSV, classesCSV, suppCSV, MyMu):
 	NbrOfFeatures = len(list(myattrib))
 	print " number of features selected:", NbrOfFeatures
 
-    	return myattrib, myclasses, NbrOfFeatures
+    	return myattrib, myclasses, NbrOfFeatures, Mydirectory, Mysubdirectory
 
 
 def makeasptraintest(attributes_train, classes_train, attributes_test, classes_test):
@@ -231,13 +229,16 @@ if __name__ == '__main__':
 	#patternfile name
 	PATname = "2018-2019/AnswerSetLAD/AnswerSetLAD_prime.asp"
 	#directory of data set
-	directory = "2018-2019/AnswerSetLAD/data/IrvineRepository/testMarch19/"
-	subdirectory = "crossvalid_mu1/"
+	#directory = "2018-2019/AnswerSetLAD/data/IrvineRepository/testMarch19/"
+	#subdirectory = "crossvalid_mu1/"
 
 	
-	attributes, classes, nbrfeatures = importdata(*sys.argv[1:])
+	attributes, classes, nbrfeatures, mydirectory, mysubdirectory = importdata(*sys.argv[1:])
 
 	NbrOfFeatures = nbrfeatures
+
+	directory = mydirectory
+	subdirectory = mysubdirectory
 	
 	#define the number of folds
 	skf = StratifiedKFold(n_splits=3)
