@@ -1,5 +1,5 @@
 
-% All Patterns of type 2018-2019/AnswerSetLAD/AnswerSetLAD_prime.asp from input file 2018-2019/AnswerSetLAD/data/IrvineRepository/testMarch19/crossvalid_mu1/train_disjoint.asp for cover calculations
+% All Patterns of type 2018-2019/AnswerSetLAD/AnswerSetLAD_prime.asp from input file 2018-2019/AnswerSetLAD/data/IrvineRepository/testMarch19/crossvalid_mu1/train_split3_disjoint.asp for cover calculations
 
  positive patterns:
  
