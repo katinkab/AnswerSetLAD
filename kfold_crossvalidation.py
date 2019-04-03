@@ -244,7 +244,7 @@ if __name__ == '__main__':
 	subdirectory = mysubdirectory
 	
 	#define the folds
-	skf = StratifiedKFold(n_splits=nbrfolds)
+	skf = StratifiedKFold(n_splits=int(nbrfolds))
 	print "skf:", skf
 	
 	#to count interations and use for saving the files
