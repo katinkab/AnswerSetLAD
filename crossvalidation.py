@@ -31,9 +31,9 @@ def crossvalidation(binCSV, classesCSV, suppCSV, MyMu, MyN):
 	
 	#filename
 	originalname = os.path.splitext(binCSV)[0]
-	name = re.sub('\_binary_nointerval$', '', originalname)
-	directory = "2018-2019/AnswerSetLAD/data/IrvineRepository/testMarch19/"
-	subdirectory = "crossvalid_mu1/"
+	name = re.sub('\_binary$', '', originalname)
+	directory = "2018-2019/AnswerSetLAD/data/IrvineRepository/BLD/"
+	subdirectory = "mu5/"
 	name = re.sub(directory,"",name)
 	
 	print "----------------------------------------"

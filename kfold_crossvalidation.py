@@ -25,7 +25,7 @@ except ImportError:
 global interation
 global NbrOfFeatures
 
-def importdata(Mydirectory, Mysubdirectory, binCSV, classesCSV, suppCSV, MyMu):
+def importdata(Mydirectory, Mysubdirectory, binCSV, classesCSV, suppCSV, MyMu, nbrfolds):
 	
 	#filename
 	originalname = os.path.splitext(binCSV)[0]
@@ -64,7 +64,7 @@ def importdata(Mydirectory, Mysubdirectory, binCSV, classesCSV, suppCSV, MyMu):
 	NbrOfFeatures = len(list(myattrib))
 	print " number of features selected:", NbrOfFeatures
 
-    	return myattrib, myclasses, NbrOfFeatures, Mydirectory, Mysubdirectory
+    	return myattrib, myclasses, NbrOfFeatures, Mydirectory, Mysubdirectory, nbrfolds
 
 
 def makeasptraintest(attributes_train, classes_train, attributes_test, classes_test):
@@ -75,9 +75,15 @@ def makeasptraintest(attributes_train, classes_train, attributes_test, classes_t
 	mytrain = attributes_train
 	mytrain.insert(0, column = "classes", value = classes_train)
 
+	print "My train:"
+	print mytrain
+
 	#testset zusammenfügen
 	mytest = attributes_test
 	mytest.insert(0, column = "classes", value = classes_test)
+
+	print "My test:"
+	print mytest
 
 	#write mytrain and mytest to csv
 	trainCSV = directory + subdirectory + "train_split" + str(iteration) + ".csv"
@@ -85,8 +91,6 @@ def makeasptraintest(attributes_train, classes_train, attributes_test, classes_t
 	mytrain.to_csv(trainCSV, index=False)
 	mytest.to_csv(testCSV, index=False)
 
-	print mytrain
-	print mytest
 	print "-----------------------------------------"
     	#disjoint
 	trainDisjointOUT = directory + subdirectory + "train_split" + str(iteration) + "_disjoint.csv"
@@ -108,7 +112,6 @@ def getaccuracy(trainDisjointASP, testASP):
 	#allpatterns
 	patternOut = directory + subdirectory + "allprimes" + str(iteration) + ".txt"
 	#nbrFeatures = len(list(mytrain))-1
-	print " here nochmal: ", NbrOfFeatures
 	allpatterns.getallpatterns(trainDisjointASP, PATname, patternOut,1,NbrOfFeatures,100,0)
 	print "-----------------------------------------"
 	#make readable input for the asp-files
@@ -233,15 +236,16 @@ if __name__ == '__main__':
 	#subdirectory = "crossvalid_mu1/"
 
 	
-	attributes, classes, nbrfeatures, mydirectory, mysubdirectory = importdata(*sys.argv[1:])
+	attributes, classes, nbrfeatures, mydirectory, mysubdirectory, nbrfolds = importdata(*sys.argv[1:])
 
 	NbrOfFeatures = nbrfeatures
 
 	directory = mydirectory
 	subdirectory = mysubdirectory
 	
-	#define the number of folds
-	skf = StratifiedKFold(n_splits=3)
+	#define the folds
+	skf = StratifiedKFold(n_splits=nbrfolds)
+	print "skf:", skf
 	
 	#to count interations and use for saving the files
 	
@@ -255,6 +259,9 @@ if __name__ == '__main__':
 		
 		x_train, x_test = attributes.loc[train_index], attributes.loc[test_index]
         	y_train, y_test = classes[train_index], classes[test_index]
+
+		print "indices train:", x_train, y_train
+		print "indices test:", x_test, y_test
 
 		mytrainasp, mytestasp = makeasptraintest(x_train, y_train, x_test, y_test)
 
