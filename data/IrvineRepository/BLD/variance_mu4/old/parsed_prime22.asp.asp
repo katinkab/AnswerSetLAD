@@ -1,0 +1,15 @@
+theorypat(1,1,1,(1,1)).
+theorypat(6,1,2,(8,1)).
+theorypat(6,1,2,(4,0)).
+theorypat(5,0,1,(8,0)).
+theorypat(2,0,2,(3,1)).
+theorypat(2,0,2,(1,0)).
+theorycov(1,1,1,(1,6)).
+theorycov(6,1,2,(1,4)).
+theorycov(5,0,1,(0,1)).
+theorycov(5,0,1,(0,2)).
+theorycov(5,0,1,(0,3)).
+theorycov(5,0,1,(0,7)).
+theorycov(2,0,2,(0,5)).
+train_nbrposobs(2).
+train_nbrnegobs(5).

@@ -1,0 +1,4 @@
+correctpos(10,of(47)).
+correctneg(58,of(66)).
+falsepos(8,of(66)).
+falseneg(37,of(47)).
