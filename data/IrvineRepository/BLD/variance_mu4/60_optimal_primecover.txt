@@ -1,0 +1,181 @@
+Answer: 1
+primecover(1,1,1). primecover(3,1,3). primecover(5,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 2
+primecover(1,1,1). primecover(3,1,3). primecover(5,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 3
+primecover(1,1,1). primecover(3,1,3). primecover(7,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 4
+primecover(1,1,1). primecover(3,1,3). primecover(7,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 5
+primecover(1,1,1). primecover(3,1,3). primecover(6,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 6
+primecover(1,1,1). primecover(3,1,3). primecover(6,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 7
+primecover(1,1,1). primecover(4,1,3). primecover(5,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 8
+primecover(1,1,1). primecover(4,1,3). primecover(5,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 9
+primecover(1,1,1). primecover(3,1,2). primecover(5,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 10
+primecover(1,1,1). primecover(1,1,2). primecover(5,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 11
+primecover(1,1,1). primecover(4,1,2). primecover(5,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 12
+primecover(1,1,1). primecover(5,1,2). primecover(5,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 13
+primecover(1,1,1). primecover(2,1,2). primecover(5,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 14
+primecover(1,1,1). primecover(6,1,2). primecover(5,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 15
+primecover(1,1,1). primecover(1,1,3). primecover(5,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 16
+primecover(1,1,1). primecover(2,1,3). primecover(5,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 17
+primecover(1,1,1). primecover(3,1,2). primecover(5,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 18
+primecover(1,1,1). primecover(1,1,2). primecover(5,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 19
+primecover(1,1,1). primecover(2,1,3). primecover(5,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 20
+primecover(1,1,1). primecover(4,1,2). primecover(5,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 21
+primecover(1,1,1). primecover(2,1,2). primecover(5,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 22
+primecover(1,1,1). primecover(6,1,2). primecover(5,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 23
+primecover(1,1,1). primecover(5,1,2). primecover(5,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 24
+primecover(1,1,1). primecover(1,1,3). primecover(5,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 25
+primecover(1,1,1). primecover(4,1,3). primecover(6,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 26
+primecover(1,1,1). primecover(4,1,3). primecover(6,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 27
+primecover(1,1,1). primecover(4,1,3). primecover(7,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 28
+primecover(1,1,1). primecover(4,1,3). primecover(7,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 29
+primecover(1,1,1). primecover(3,1,2). primecover(6,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 30
+primecover(1,1,1). primecover(1,1,2). primecover(6,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 31
+primecover(1,1,1). primecover(1,1,3). primecover(6,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 32
+primecover(1,1,1). primecover(2,1,3). primecover(6,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 33
+primecover(1,1,1). primecover(6,1,2). primecover(6,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 34
+primecover(1,1,1). primecover(2,1,2). primecover(6,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 35
+primecover(1,1,1). primecover(4,1,2). primecover(6,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 36
+primecover(1,1,1). primecover(5,1,2). primecover(6,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 37
+primecover(1,1,1). primecover(3,1,2). primecover(6,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 38
+primecover(1,1,1). primecover(1,1,2). primecover(6,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 39
+primecover(1,1,1). primecover(1,1,3). primecover(6,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 40
+primecover(1,1,1). primecover(5,1,2). primecover(6,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 41
+primecover(1,1,1). primecover(2,1,2). primecover(6,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 42
+primecover(1,1,1). primecover(6,1,2). primecover(6,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 43
+primecover(1,1,1). primecover(2,1,3). primecover(6,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 44
+primecover(1,1,1). primecover(4,1,2). primecover(6,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 45
+primecover(1,1,1). primecover(4,1,2). primecover(7,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 46
+primecover(1,1,1). primecover(5,1,2). primecover(7,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 47
+primecover(1,1,1). primecover(6,1,2). primecover(7,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 48
+primecover(1,1,1). primecover(2,1,2). primecover(7,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 49
+primecover(1,1,1). primecover(1,1,3). primecover(7,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 50
+primecover(1,1,1). primecover(2,1,3). primecover(7,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 51
+primecover(1,1,1). primecover(3,1,2). primecover(7,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 52
+primecover(1,1,1). primecover(1,1,2). primecover(7,0,1). primecover(2,0,2).
+Optimization: 4
+Answer: 53
+primecover(1,1,1). primecover(2,1,3). primecover(7,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 54
+primecover(1,1,1). primecover(4,1,2). primecover(7,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 55
+primecover(1,1,1). primecover(5,1,2). primecover(7,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 56
+primecover(1,1,1). primecover(2,1,2). primecover(7,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 57
+primecover(1,1,1). primecover(6,1,2). primecover(7,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 58
+primecover(1,1,1). primecover(1,1,3). primecover(7,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 59
+primecover(1,1,1). primecover(3,1,2). primecover(7,0,1). primecover(1,0,2).
+Optimization: 4
+Answer: 60
+primecover(1,1,1). primecover(1,1,2). primecover(7,0,1). primecover(1,0,2).
+Optimization: 4
+

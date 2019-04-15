@@ -10,6 +10,7 @@ import re
 from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import KFold
 from sklearn.model_selection import StratifiedShuffleSplit
+from sklearn.model_selection import ShuffleSplit
 
 from SupportSets import Greedy
 from SupportSets import PickFeatures_Greedy
@@ -27,7 +28,7 @@ except ImportError:
 global interation
 global NbrOfFeatures
 
-def importdata(Mydirectory, Mysubdirectory, binCSV, classesCSV, suppCSV, MyMu, nbrfolds):
+def importdata(Mydirectory, Mysubdirectory, binCSV, classesCSV, suppCSV, MyMu, nbrfolds, *HaveShortCSV):
 	
 	#filename
 	originalname = os.path.splitext(binCSV)[0]
@@ -46,14 +47,26 @@ def importdata(Mydirectory, Mysubdirectory, binCSV, classesCSV, suppCSV, MyMu, n
 	print " short outfile: ", shortOutCSV
 	print " m =", MyMu	
 
-	print "-----------------------------------------"
-	#greedy
-	Greedy.support(suppCSV,classesCSV,keepTXT,MyMu)
-	print "-----------------------------------------"
-	#pickfeatures
-	PickFeatures_Greedy.pickfeatgreedy(binCSV,keepTXT,shortOutCSV)
+	if not HaveShortCSV:
+		print "Features not yet selected for this mu. We calculate:"
+		print "-----------------------------------------"
+		#greedy
+		Greedy.support(suppCSV,classesCSV,keepTXT,MyMu)
+		print "-----------------------------------------"
+		#pickfeatures
+		PickFeatures_Greedy.pickfeatgreedy(binCSV,keepTXT,shortOutCSV)
+	else:
+		print "We already have a short csv file (with features selected for given mu)!"
+		print "this is the path: ", HaveShortCSV
+		Myshortfile = pandas.read_csv(HaveShortCSV[0], header=0, delimiter=",")
+		Myshortfile.to_csv(shortOutCSV, index=False)
+		print "We can use it!"
 
-	MyData = pandas.read_csv(shortOutCSV)
+	#DISJOINT COMPLETE DATA SET
+	FullDisjointOUT = Mydirectory + Mysubdirectory + "short_disjoint.csv"
+	Disjoint.disjoint(shortOutCSV, FullDisjointOUT)
+
+	MyData = pandas.read_csv(FullDisjointOUT)
 
 	#names of columns
     	myheaders = list(MyData.columns.values)
@@ -88,13 +101,13 @@ def makeasptraintest(attributes_train, classes_train, attributes_test, classes_t
 	mytest.to_csv(testCSV, index=False)
 
 	print "-----------------------------------------"
-    	#disjoint
-	trainDisjointOUT = directory + subdirectory + "train_split" + str(iteration) + "_disjoint.csv"
-	Disjoint.disjoint(trainCSV, trainDisjointOUT)
+    	#DISJOINT only train set
+	#trainDisjointOUT = directory + subdirectory + "train_split" + str(iteration) + "_disjoint.csv"
+	#Disjoint.disjoint(trainCSV, trainDisjointOUT)
 	print "-----------------------------------------"
 	#make asp file train disjoint
-	trainDisjointASP = os.path.splitext(trainDisjointOUT)[0]+ ".asp"
-	MakaDataFile.txt2asp(trainDisjointOUT,trainDisjointASP)
+	trainDisjointASP = os.path.splitext(trainCSV)[0]+ ".asp"
+	MakaDataFile.txt2asp(trainCSV,trainDisjointASP)
 	#make asp file test (no disjoint needed)
 	testASP = os.path.splitext(testCSV)[0]+ ".asp"
 	MakaDataFile.txt2asp(testCSV,testASP)
@@ -227,10 +240,6 @@ if __name__ == '__main__':
 	clingo = "Arbeitsfläche/clingo-4.5.4-linux-x86_64/clingo"
 	#patternfile name
 	PATname = "2018-2019/AnswerSetLAD/AnswerSetLAD_prime.asp"
-	#directory of data set
-	#directory = "2018-2019/AnswerSetLAD/data/IrvineRepository/testMarch19/"
-	#subdirectory = "crossvalid_mu1/"
-
 	
 	attributes, classes, nbrfeatures, mydirectory, mysubdirectory, nbrfolds = importdata(*sys.argv[1:])
 
@@ -240,7 +249,9 @@ if __name__ == '__main__':
 	subdirectory = mysubdirectory
 	
 	#define the folds
-	skf = StratifiedShuffleSplit(n_splits=int(nbrfolds), train_size=0.66)
+	#BCW
+	#skf = StratifiedShuffleSplit(n_splits=int(nbrfolds), test_size=0.33, train_size=0.66)
+	skf = StratifiedKFold(n_splits=int(nbrfolds))
 	print "skf:", skf
 	
 	#to count interations and use for saving the files
