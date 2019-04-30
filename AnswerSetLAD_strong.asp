@@ -83,8 +83,8 @@ covered(W,X):-not not_covered(W,X),i(W,X,_,_).
 
 #show pat/2.
 
-#show countlit/1.
-#show lit/2.
+%#show countlit/1.
+%#show lit/2.
 #show nbrcovered/1.
 #show cov/2.
 

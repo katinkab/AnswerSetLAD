@@ -5,7 +5,7 @@
 rowsum(R):- 1 <= #sum{E,C:support(C),entry(R,C,E)}, entry(R,_,_).
 
 %FOR TESTING
-%sum(S,R):- S = #sum{E,C:support(C),entry(R,C,E)}, entry(R,_,_).
+sum(S,R):- S = #sum{E,C:support(C),entry(R,C,E)}, entry(R,_,_).
 
 %minimize columns needed such that rowsum still exists
 :-entry(R,_,_), not rowsum(R).
@@ -13,5 +13,5 @@ rowsum(R):- 1 <= #sum{E,C:support(C),entry(R,C,E)}, entry(R,_,_).
 #minimize {1,C:support(C)}.
 
 %#show rowsum/1.
-%#show sum/2.
+#show sum/2.
 #show support/1.

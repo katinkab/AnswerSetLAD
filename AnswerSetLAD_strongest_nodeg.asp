@@ -45,3 +45,5 @@ covered(W,X):-not not_covered(W,X),i(W,X,_,_).
 %%%strong end
 
 #show pat/2.
+#show covered/2.
+#show not_covered/2.

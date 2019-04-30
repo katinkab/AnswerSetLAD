@@ -39,5 +39,6 @@ patternweight((N,S,D),K) :- pat(N,S,D,_), K = #sum{W, (Y,V),S  : fullliteralweig
 #show primecover/3.
 %#show occ/2.
 %#show literalweight/5.
-%#show fullliteralweight/2.
+#show literalweight/5.
+#show fullliteralweight/2.
 %#show patternweight/2.

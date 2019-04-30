@@ -169,16 +169,6 @@ def pattgen(data,
 				negdecision = False
 
 	negtime = time.time()-neg_time
-<<<<<<< HEAD
-	print "--- Done in %s seconds. ---" % str(postime+negtime)
-	print "--- Positive patterns: %s seconds. ---" % str(postime)
-	print "--- Positive patterns only clingo process: %s seconds. --" % str(posfulltime)
-	print "--- Negative patterns: %s seconds. ---" % str(negtime)
-	print "--- Negative patterns only clingo process: %s seconds. --" % str(negfulltime)
-
-	for i in range(0,100):
-		print "Hallo Moritz!"
-=======
 
 	print "------------------------------------------------------"
 	print "--- Done in %s seconds." % str(postime+negtime)
@@ -190,7 +180,6 @@ def pattgen(data,
 	print "--- 	only clingo process: %s seconds." % str(negfulltime)
 	print "--- 	clingo process + printing: %s seconds." % str(negwithprint)
 	print "------------------------------------------------------"
->>>>>>> 2bd7893b071d356a9dc3aa7cbd008264be431799
 
 	os.remove(smalldatafile)
 

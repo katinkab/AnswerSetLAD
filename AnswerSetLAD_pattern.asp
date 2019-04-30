@@ -45,3 +45,4 @@ covered(W,X):-not not_covered(W,X),i(W,X,_,_).
 :-nbrrightobs(C),#sum{100,X:covered(W,X),W=sign}<prevalence*C.
 
 #show pat/2.
+#show covered/2.
