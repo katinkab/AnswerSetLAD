@@ -31,9 +31,16 @@ countlit(E):-E=#sum{1,(S,B):lit(S,B)}.
 in_op(Y,(S,B)):-lit(S,B),i(Q,Y,S,B),Q!=sign.
 countinop(Y,D):-i(Q,Y,_,_),Q!=sign,D=#sum{1,(S,B):in_op(Y,(S,B))}.
 
+%%can we add an observation (not covered yet) to this set of literals? (does it actually cover more?)
+obsnotincover(sign,Y):-i(sign,Y,_,_), not cov(sign, Y).
+not_addobs(sign,Y):-obsnotincover(sign,Y),lit(S,B), not i(sign,Y,S,B).
+addobs(sign,Y):-obsnotincover(sign,Y), not not_addobs(sign,Y).
+
 %%%TEST%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%not a pattern if full literal combination (pattern) covers an obs of opposite sign
 :-D=E,countlit(E),countinop(_,D).
+
+:-addobs(sign,_).
 
 #show countlit/1.
 #show lit/2.
