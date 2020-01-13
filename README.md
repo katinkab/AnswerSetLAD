@@ -68,7 +68,7 @@ i(1,1,9,0).
 i(1,1,10,0).
 ```
 
-### Calculating patterns
+### Pattern generation
 
 To execute the files for pattern generation we use the ASP solver _clingo_ by [Potassco](https://potassco.org/). 
 Various types of patterns are implemented, namely:
@@ -120,6 +120,10 @@ pat(2,0) pat(9,0)
 SATISFIABLE
 ```
 This result shows all positive prime patterns of degree two with perfect homogeneity and trivial bound on the prevalence.
+
+#### Pattern generation using _asprin_
+For the calculation of Pareto-optimal patterns we implemented the option to solve the problem instances using _asprin_ [asprin] (https://github.com/potassco/asprin), which is a general framework for optimization in ASP by [Potassco](https://potassco.org/). 
+
 
 #### Calculating all patterns for a data set
 
