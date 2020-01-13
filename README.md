@@ -1,25 +1,25 @@
 # AnswerSetLAD
-AnswerSetLAD is a toolbox for pattern generation according to the _Logical Analysis of Data_ (LAD) making use of _Answer Set Programming_ (ASP). 
+AnswerSetLAD is a software package for data binarization, pattern generation and theory formation according to the _Logical Analysis of Data_ (LAD) making use of _Answer Set Programming_ (ASP). 
 
 ## Definitions
 
 ### Homogeneity of a pattern
 The _homogeneity_ _Hom⁺(P)_ of a positive pattern _P_ is given by
 ```
-Hom⁺(P)=Cov⁺(P)/Cov(P),
+Hom⁺(P)=|Cov(P)|/|Cov_total(P)|,
 ```
-where _Cov⁺(P)_ is the number of positive observations covered by _P_ and _Cov(P)_ is the number of observations covered in total. The homogeneity _Hom⁻(P)_  of a negative pattern _P_ is defined analogously.
+where _Cov(P)_ is the set of positive observations covered by _P_ and _Cov_total(P)_ is the set of observations covered in total. The homogeneity _Hom⁻(P)_  of a negative pattern _P_ is defined analogously.
 
 ### Prevalence of a pattern
 The _prevalence_ _Prev⁺(P)_ of a positive pattern _P_ is given by
 ```
-Prev⁺(P)=Cov⁺(P)/|Ω⁺|,
+Prev⁺(P)=|Cov(P)|/|Ω⁺|,
 ```
-where _Cov⁺(P)_ is the number of positive observations covered by _P_ and _Ω⁺_ is the set of positive observations. The prevalence _Prev⁻(P)_ of a negative pattern _P_ is defined analogously.
+where _Cov(P)_ is the set of positive observations covered by _P_ and _Ω⁺_ is the set of positive observations. The prevalence _Prev⁻(P)_ of a negative pattern _P_ is defined analogously.
 
 ## Example
 ### Input data
-An input data file is a 0-1 matrix. Each row of the matrix represents an observation. The first column stands for the sign of the observation. The following columns represent the different features which were observed.
+An input data file is a 0-1 matrix. Each row of the matrix represents an observation. The first column stands for the sign of the observation. The following columns represent the different features that were observed.
 An example of a suitable input data file is given in [10x10input.txt](./data/10x10input.txt):
 ```
 1,1,0,0,0,0,1,1,1,0,0
@@ -51,7 +51,7 @@ i(sign, observationnumber, featurenumber, featurevalue).
 where 
  * _sign_ is the sign of the observation, 
  * _observationnumber_ is the number of the observation,
- * _featurenumber_ is the number of the feature,
+ * _featurenumber_ is the ID number of the feature,
  * _featurevalue_ is the value of the feature.
 
 The first row of the given example data in [10x10input.txt](./data/10x10input.txt) therefore looks like this in the output file:
@@ -71,9 +71,16 @@ i(1,1,10,0).
 ### Calculating patterns
 
 To execute the files for pattern generation we use the ASP solver _clingo_ by [Potassco](https://potassco.org/). 
-So far three different kinds of patterns are implemented, namely general patterns [AnswerSetLAD_patterns.asp](./AnswerSetLAD_patterns.asp), prime patterns [AnswerSetLAD_primepatterns.asp](./AnswerSetLAD_primepatterns.asp) and strong patterns [AnswerSetLAD_strongpatterns.asp](./AnswerSetLAD_strongpatterns.asp).
-
-Each of the pattern generation files include four constants that have to be specified by the user (otherwise they are set to the default option). These constants are
+Various types of patterns are implemented, namely:
+ * general patterns [AnswerSetLAD_pattern.asp](./AnswerSetLAD_pattern.asp)
+ * prime patterns [AnswerSetLAD_prime.asp](./AnswerSetLAD_prime.asp) 
+ * strong patterns [AnswerSetLAD_strong.asp](./AnswerSetLAD_strong.asp)
+ * spanned patterns [AnswerSetLAD_spanned.asp](./AnswerSetLAD_spanned.asp)
+ * strong prime patterns [AnswerSetLAD_strongprime.asp](./AnswerSetLAD_strongprime.asp)
+ * strong spanned patterns [AnswerSetLAD_strongspanned.asp](./AnswerSetLAD_strongspanned.asp)
+ * maximal patterns [AnswerSetLAD_maximal.asp](./AnswerSetLAD_maximal.asp)
+ 
+Each of the pattern generation files include up to four constants that have to be specified by the user (otherwise they are set to the default option). These constants are
 
  * _sign_ is the sign of the pattern;
  * _degree_ is the degree of the pattern;
@@ -85,7 +92,7 @@ see the definitions above for explanation.
 To calculate a positive prime pattern of degree two from the toy data set call:
  
 ```
-$ clingo data/10x10input.asp AnswerSetLAD_primepattern.asp -c sign=1 -c degree=2 -c homogeneity=100 -c prevalence=0 
+$ clingo data/10x10input.asp AnswerSetLAD_prime.asp -c sign=1 -c degree=2 -c homogeneity=100 -c prevalence=0 
 ```
 The problem will be solved and the terminal displays the following answer:
 ```
@@ -99,7 +106,7 @@ The answer set is a set of literals _pat(featurenumber,featurevalue)_ which are 
 
 The answer set of each program is one pattern fulfilling the given constraints. To see all optimal patterns use the `-n 0` option of _clingo_:
 ```
-$ clingo data/10x10input.asp AnswerSetLAD_primepattern.asp -c sign=1 -c degree=2 -c homogeneity=100 -c prevalence=0 -n 0
+$ clingo data/10x10input.asp AnswerSetLAD_prime.asp -c sign=1 -c degree=2 -c homogeneity=100 -c prevalence=0 -n 0
 
 Solving...
 Answer: 1
@@ -129,7 +136,7 @@ To calculate all positive and negative patterns between a lower bound on the deg
 The function call
 
 ```
-python allpatterns.py data/10x10input.asp AnswerSetLAD_strongpattern.asp 1 10 90 10
+python allpatterns.py data/10x10input.asp AnswerSetLAD_strong.asp 1 10 90 10
 
 ```
 will thus calculate all strong patterns in the example data set from degree 1 to degree 10 with homogeneity greater or equal 90 percent and prevalence greater or equal 10 percent.
