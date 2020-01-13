@@ -1,4 +1,0 @@
-correctpos(0,of(1)).
-correctneg(1,of(1)).
-falsepos(0,of(1)).
-falseneg(1,of(1)).

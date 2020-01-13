@@ -1,4 +1,0 @@
-correctpos(8,of(47)).
-correctneg(58,of(66)).
-falsepos(8,of(66)).
-falseneg(39,of(47)).
