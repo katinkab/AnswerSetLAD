@@ -145,8 +145,8 @@ will thus calculate all strong patterns in the example data set from degree 1 to
 
 
 ## Additional folders
- * [ASPvsMIP](./ASPvsMIP) contains data files and MILP for the comparison between ASP and MIP with regards to maximal pattern generation.
- * [DataBinarization](./DataBinarization) includes a _python_ program for the binarization of a numerical data set based on the introduction of level (and interval) variables.
+ * [ASPvsMIP](./ASPvsMIP) contains data files and Mixed-Integer Linear Programs for the comparison between ASP and MIP with regards to maximal pattern generation.
+ * [DataBinarization](./DataBinarization) includes a program for the binarization of a numerical data set based on the introduction of level (and interval) variables.
  * [PerformanceTesting](./PerformanceTesting) contains programs for k-fold crossvalidation tests.
  * [SupportSets](./SupportSets) is part of the binarization step. It includes programs for support set calculation and greedy feature selection.
  * [TheoryFormation](./TheoryFormation) includes programs to calculate pattern covers and make predictions;
