@@ -103,7 +103,6 @@ SATISFIABLE
 ```
 The answer set is a set of literals _pat(featurenumber,featurevalue)_ which are combined by AND gates. This answer set represents the prime pattern `NOT feature 9 AND NOT feature 10`.
 
-
 The answer set of each program is one pattern fulfilling the given constraints. To see all optimal patterns use the `-n 0` option of _clingo_:
 ```
 $ clingo data/10x10input.asp AnswerSetLAD_prime.asp -c sign=1 -c degree=2 -c homogeneity=100 -c prevalence=0 -n 0
@@ -122,8 +121,7 @@ SATISFIABLE
 This result shows all positive prime patterns of degree two with perfect homogeneity and trivial bound on the prevalence.
 
 #### Pattern generation using _asprin_
-For the calculation of Pareto-optimal patterns we implemented the option to solve the problem instances using _asprin_ [asprin] (https://github.com/potassco/asprin), which is a general framework for optimization in ASP by [Potassco](https://potassco.org/). 
-
+For the calculation of Pareto-optimal patterns we implemented the option to solve the problem instances using _asprin_ (https://github.com/potassco/asprin), which is a general framework for optimization in ASP. 
 
 #### Calculating all patterns for a data set
 
@@ -146,11 +144,11 @@ python allpatterns.py data/10x10input.asp AnswerSetLAD_strong.asp 1 10 90 10
 will thus calculate all strong patterns in the example data set from degree 1 to degree 10 with homogeneity greater or equal 90 percent and prevalence greater or equal 10 percent.
 
 
-## Files
- * [AnswerSetLAD_patterns.asp](./AnswerSetLAD_patterns.asp) contains the code for generating patterns;
- * [AnswerSetLAD_primepatterns.asp](./AnswerSetLAD_primepatterns.asp) contains the code for generating _prime_ patterns;
- * [AnswerSetLAD_strongpatterns.asp](./AnswerSetLAD_strongpatterns.asp) contains the code for generating _strong_ patterns;
- * [MakeDataFile.py](./MakeDataFile.py) is used to produce a data file in the required format;
- * [allpatterns.py](./allpatterns.py) computes all patterns between bounds on the degree;
+## Additional folders
+ * [ASPvsMIP](./ASPvsMIP) contains data files and MILP for the comparison between ASP and MIP with regards to maximal pattern generation.
+ * [DataBinarization](./DataBinarization) includes a _python_ program for the binarization of a numerical data set based on the introduction of level (and interval) variables.
+ * [PerformanceTesting](./PerformanceTesting) contains programs for k-fold crossvalidation tests.
+ * [SupportSets](./SupportSets) is part of the binarization step. It includes programs for support set calculation and greedy feature selection.
+ * [TheoryFormation](./TheoryFormation) includes programs to calculate pattern covers and make predictions;
  * [data](./data) contains example data files both in .txt as well as in the required .asp format.
 
