@@ -10,11 +10,13 @@ import time
 This script can be used to calculate a full pattern cover based on the precedure "PattGen" by Ryoo et al. (2016)
 """
 
-def pattgen(data,
+def pattgen(PATHclingo,
+	    data,
 	    patterntype):
 	"""
 	User input explained:
-
+	
+	PATHclingo = path to cling
 	data = input data (binary)
 	patterntype = AnswerSetLAD pattern generation file (depending on pattern type that should be used)
 		- first verion: use AnswerSetLAD_maximal_nodeg.asp
@@ -22,15 +24,13 @@ def pattgen(data,
 
 	print " "
 	print "--- PattGen generates a full pattern cover for you. ---"
-
-	clingo = "Arbeitsfläche/clingo-4.5.4-linux-x86_64/clingo"
 	
 	#read data file to list
 	datafile = open(data, "r")
 	workdata = datafile.read().split()[9:]
 
 	#copy of data file for deletion process	
-	smalldatafile = "2018-2019/AnswerSetLAD/data/workdata.asp"
+	smalldatafile = "workdata.asp"
 	with open(smalldatafile, "w") as f:
 	    		for item in workdata:
 				f.write("%s\n" % item)
@@ -63,7 +63,7 @@ def pattgen(data,
 	#positive patterns
 	while decision == True:
 		posstart_time = time.time()
-		process = subprocess.Popen([clingo, smalldatafile, patterntype, "-c sign=1", "--quiet=1"], stdout=subprocess.PIPE)
+		process = subprocess.Popen([PATHclingo, smalldatafile, patterntype, "-c sign=1", "--quiet=1"], stdout=subprocess.PIPE)
 		posend_time = time.time()
 		posfulltime = posfulltime + posend_time - posstart_time
 		
@@ -77,7 +77,7 @@ def pattgen(data,
 				
 		
 		print "pattern:", pospattern		
-		#print " coverage:", coverlist
+		print " coverage:", coverlist
 		print " size of coverage:", len(coverlist)
 		
 		posprint_end = time.time()
@@ -119,7 +119,7 @@ def pattgen(data,
 	print "--- Negative patterns ---"
 	while negdecision == True:
 		negstart_time = time.time()
-		process = subprocess.Popen([clingo, smalldatafile, patterntype, "-c sign=0", "--quiet=1"], stdout=subprocess.PIPE)
+		process = subprocess.Popen([PATHclingo, smalldatafile, patterntype, "-c sign=0", "--quiet=1"], stdout=subprocess.PIPE)
 		
 		negend_time = time.time()
 		negfulltime = negfulltime + negend_time - negstart_time
