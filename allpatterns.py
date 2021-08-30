@@ -3,7 +3,8 @@
 import subprocess
 import sys
 
-def getallpatterns(FnameDATA,
+def getallpatterns(PATHclingo,
+		   FnameDATA,
 		   FnamePAT,
 	           OutFile,
 	           DegLowerBound,
@@ -13,6 +14,7 @@ def getallpatterns(FnameDATA,
 		   *IsQuiet):
 
         print "--- getallpatterns starts calculating..."
+	print " path to clingo:", PATHclingo
         print " data file:", FnameDATA
 	print " patterns calculated with:", FnamePAT
 	print " lower bound degree:", DegLowerBound
@@ -28,8 +30,6 @@ def getallpatterns(FnameDATA,
 	homint = int(Hom)
 	prevint = int(Prev)
 		
-	clingo = "Arbeitsfläche/clingo-4.5.4-linux-x86_64/clingo"
-
 	outfile= [""]
     	outfile+= ["%% All Patterns of type %s from input file %s for cover calculations"%(FnamePAT, FnameDATA)]
 	outfile+= [""]
@@ -39,9 +39,9 @@ def getallpatterns(FnameDATA,
 
 	for deg in range(low,high+1):
 		if "quiet" in IsQuiet:
-			process = subprocess.Popen([clingo, FnameDATA, FnamePAT, "-c sign=1", "-c degree=%i"%deg, "-c homogeneity=%i"%homint, "-c prevalence=%i"%prevint, "-n 0", "--quiet"], stdout=subprocess.PIPE)
+			process = subprocess.Popen([PATHclingo, FnameDATA, FnamePAT, "-c sign=1", "-c degree=%i"%deg, "-c homogeneity=%i"%homint, "-c prevalence=%i"%prevint, "-n 0", "--quiet"], stdout=subprocess.PIPE)
 		else:
-			process = subprocess.Popen([clingo, FnameDATA, FnamePAT, "-c sign=1", "-c degree=%i"%deg, "-c homogeneity=%i"%homint, "-c prevalence=%i"%prevint, "-n 0"], stdout=subprocess.PIPE)
+			process = subprocess.Popen([PATHclingo, FnameDATA, FnamePAT, "-c sign=1", "-c degree=%i"%deg, "-c homogeneity=%i"%homint, "-c prevalence=%i"%prevint, "-n 0"], stdout=subprocess.PIPE)
 		while True:
   			line = process.stdout.readline()
   			if line !="":
@@ -63,9 +63,9 @@ def getallpatterns(FnameDATA,
 
 	for deg in range(low,high+1):
 		if "quiet" in IsQuiet:
-			process = subprocess.Popen([clingo, FnameDATA, FnamePAT, "-c sign=0", "-c degree=%i"%deg, "-c homogeneity=%i"%homint, "-c prevalence=%i"%prevint, "-n 0", "--quiet"], stdout=subprocess.PIPE)
+			process = subprocess.Popen([PATHclingo, FnameDATA, FnamePAT, "-c sign=0", "-c degree=%i"%deg, "-c homogeneity=%i"%homint, "-c prevalence=%i"%prevint, "-n 0", "--quiet"], stdout=subprocess.PIPE)
 		else:
-			process = subprocess.Popen([clingo, FnameDATA, FnamePAT, "-c sign=0", "-c degree=%i"%deg, "-c homogeneity=%i"%homint, "-c prevalence=%i"%prevint, "-n 0"], stdout=subprocess.PIPE)
+			process = subprocess.Popen([PATHclingo, FnameDATA, FnamePAT, "-c sign=0", "-c degree=%i"%deg, "-c homogeneity=%i"%homint, "-c prevalence=%i"%prevint, "-n 0"], stdout=subprocess.PIPE)
 		while True:
   			line = process.stdout.readline()
   			if line !="":
