@@ -24,7 +24,6 @@
 %%%count number of "right" observations (same sign as pattern)
 nbrrightobs(C):-C=#sum{1,X:i(sign,X,_,_)}.
 
-
 %%%GENERATE%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%one pattern of degree 'degree'
 degree{pat(S,B):i(sign,_,S,B)}degree.
