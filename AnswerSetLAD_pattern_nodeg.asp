@@ -18,8 +18,6 @@
 %%%prevalence (percentage): 0..100% of "right" class obs are covered (how many obs of "right" class have be covered?)
 #const prevalence=0.
 
-
-
 %%%count number of "right" observations (same sign as pattern)
 nbrrightobs(C):-C=#sum{1,X:i(sign,X,_,_)}.
 
