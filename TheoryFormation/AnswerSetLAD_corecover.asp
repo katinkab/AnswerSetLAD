@@ -10,7 +10,6 @@
 %		format: i(obssign, obsnumber, variable, value).
 
 
-
 % GENERATE
 { primecover(N,S,D) } :- pat(N,S,D,_).
 
