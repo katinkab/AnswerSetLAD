@@ -1,4 +1,3 @@
-
 % Data usable for AnswerSetLAD from input file 2018/AnswerSetLAD/data/7x8_hammer.txt
 
 i(1,1,1,0).
