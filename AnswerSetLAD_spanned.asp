@@ -46,4 +46,3 @@ addobs(sign,Y):-obsnotincover(sign,Y), not not_addobs(sign,Y).
 #show lit/2.
 #show nbrcovered/1.
 #show cov/2.
-
