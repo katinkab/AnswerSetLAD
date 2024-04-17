@@ -49,7 +49,6 @@ notabiggerpat(Y):-nbrlitinnew(Y,M),litinnew_countinop(Z,D,Y),M=D.
 %%if we find a pattern which is not fully included, then the original pattern (covered set) does not form a strong (spanned) pattern
 :-not notabiggerpat(Y),lit_in_new(Y,_).
 
-
 %%%%%%%%%%%%%%%%%%%%%ONLY STRONG!
 
 %TO GET FROM STRONG SPANNED TO STRONG PATTERNS:
