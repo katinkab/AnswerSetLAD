@@ -53,4 +53,3 @@ notabiggerpat(Y):-nbrlitinnew(Y,M),litinnew_countinop(Z,D,Y),M=D.
 #show lit/2.
 #show nbrcovered/1.
 #show cov/2.
-
