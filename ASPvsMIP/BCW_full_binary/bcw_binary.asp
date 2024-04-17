@@ -1,4 +1,3 @@
-
 % Data usable for AnswerSetLAD from input file 2018-2019/MIPsForLAD/strongest_BCW_binary/bcw_binary.csv
 
 i(0,1,1,1).
