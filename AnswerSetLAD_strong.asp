@@ -49,7 +49,6 @@ notabiggerpat(Y):-nbrlitinnew(Y,M),litinnew_countinop(Z,D,Y),M=D.
 %%if we find a pattern which is not fully included, then the original pattern (covered set) does not form a strong (spanned) pattern
 :-not notabiggerpat(Y),lit_in_new(Y,_).
 
-
 %%%%%%%%%%%%%%%%%%%%%ONLY STRONG!
 %TO GET FROM STRONG SPANNED TO STRONG PATTERNS:
 %-easy: just use any combination (that does not cover an opposite observation) of literals as a pattern 
@@ -63,8 +62,6 @@ notabiggerpat(Y):-nbrlitinnew(Y,M),litinnew_countinop(Z,D,Y),M=D.
 
 %%%prevalence (percentage): 0..100% of "right" class obs are covered (how many obs of "right" class have be covered?)
 #const prevalence=0.
-
-
 
 %%%count number of "right" observations (same sign as pattern)
 nbrrightobs(C):-C=#sum{1,X:i(sign,X,_,_)}.
